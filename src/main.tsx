@@ -4,7 +4,8 @@ import './index.css';
 import App from './App.tsx';
 
 const rootContainer = document.getElementById('root');
-if (rootContainer !== null)  createRoot(rootContainer).render(
+if (rootContainer !== null)
+  createRoot(rootContainer).render(
     <StrictMode>
       <App />
     </StrictMode>
