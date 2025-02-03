@@ -51,9 +51,12 @@ class App extends React.Component<{}, AppState> {
   render() {
     return (
       <div className="app">
-        <Loading isLoading={this.state.isLoading} />
-        <SearchSection onSearch={this.handleSearch} />
-        <ResultSection results={this.state.searchResult} />
+        <header>Hi! This is an application for searching planets!</header>
+        <main>
+          <SearchSection onSearch={this.handleSearch} />
+          <ResultSection results={this.state.searchResult} />
+          <Loading isLoading={this.state.isLoading} />
+        </main>
       </div>
     );
   }
