@@ -53,6 +53,10 @@ button:active {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+li{
+  list-style: none;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

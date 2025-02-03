@@ -37,7 +37,6 @@ class App extends React.Component<{}, AppState> {
         `https://swapi.dev/api/planets?search=${searchTerm}`
       );
       const data = await response.json();
-      console.log(data.results);
       this.setState({ searchResult: data.results, isLoading: false });
     } catch (error: unknown) {
       console.log(`The ERROR ${error} occurred`);
