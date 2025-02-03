@@ -1,4 +1,5 @@
 import React from 'react';
+import './resultSection.css';
 
 interface ResultSectionProps {
   results: ResultItem[] | null;
@@ -21,11 +22,13 @@ class ResultSection extends React.Component<ResultSectionProps> {
     }
     return (
       <div>
-        <ul>
+        <div style={{ paddingBottom: '10px', fontWeight: '700' }}>
           Search Results
+        </div>
+        <ul className="results-list">
           {this.props.results.map((item: ResultItem) => (
             <li key={item.url}>
-              <span>{item.name}</span>
+              <span className="results-item-name">{item.name}</span>
               <span>{item.terrain}</span>
             </li>
           ))}

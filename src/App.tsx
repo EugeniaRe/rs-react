@@ -2,6 +2,7 @@ import React from 'react';
 import Loading from './components/Loading/Loading';
 import SearchSection from './components/SearchSection/SearchSection';
 import ResultSection from './components/ResultSection/ResultSection';
+import './App.css';
 
 interface AppState {
   isLoading: boolean;

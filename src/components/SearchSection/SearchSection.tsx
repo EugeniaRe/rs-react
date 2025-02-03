@@ -30,7 +30,7 @@ class SearchSection extends React.Component<
 
   render() {
     return (
-      <div>
+      <div style={{ paddingBottom: '20px' }}>
         <input
           type="text"
           placeholder="Search..."
