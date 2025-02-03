@@ -22,10 +22,12 @@ class ResultSection extends React.Component<ResultSectionProps> {
     }
     return (
       <div>
-        <div style={{ paddingBottom: '10px', fontWeight: '700' }}>
-          Search Results
-        </div>
+        <div className="results-head">Search Results</div>
         <ul className="results-list">
+          <div className="results-list-head">
+            <span className="results-head-name">Planet</span>
+            <span>Terrain</span>
+          </div>
           {this.props.results.map((item: ResultItem) => (
             <li key={item.url}>
               <span className="results-item-name">{item.name}</span>
