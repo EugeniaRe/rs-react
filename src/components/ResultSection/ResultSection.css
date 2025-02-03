@@ -1,0 +1,27 @@
+.results-list {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.results-head {
+  padding-bottom: 10px;
+  font-weight: 700;
+}
+.results-list-head {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  border-bottom: 1px solid black;
+}
+
+.results-head-name {
+  display: inline-block;
+  width: 120px;
+}
+
+.results-item-name {
+  display: inline-block;
+  width: 120px;
+  color: blue;
+}
