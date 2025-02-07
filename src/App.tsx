@@ -1,65 +1,215 @@
-import React from 'react';
-import Loading from './components/Loading/Loading';
-import SearchSection from './components/SearchSection/SearchSection';
-import ResultSection from './components/ResultSection/ResultSection';
-import './App.css';
+// import React, { useEffect, useState } from 'react';
+// import Loading from './components/Loading/Loading';
+// import './App.css';
 
-interface AppState {
-  isLoading: boolean;
-  searchTerm: string;
-  searchResult: ResultItem[] | null;
-}
+// // interface AppState {
+// //   isLoading: boolean;
+// //   searchTerm: string;
+// //   searchResult: ResultItem[] | null;
+// // }
+
+// // interface ResultItem {
+// //   url: string;
+// //   name: string;
+// //   terrain: string;
+// // }
+// // class App extends React.Component<{}, AppState> {
+// //   constructor(props: {}) {
+// //     super(props);
+// //     this.state = {
+// //       isLoading: false,
+// //       searchTerm: localStorage.getItem('searchTerm') || '',
+// //       searchResult: null,
+// //     };
+// //   }
+
+// //   handleSearch = (searchTerm: string) => {
+// //     this.setState({ searchTerm: searchTerm });
+// //     this.fetchData(searchTerm);
+// //   };
+
+// //   fetchData = async (searchTerm: string) => {
+// //     this.setState({ isLoading: true });
+
+// //     try {
+// //       const response = await fetch(
+// //         `https://swapi.dev/api/planets?search=${searchTerm}`
+// //       );
+// //       const data = await response.json();
+// //       this.setState({ searchResult: data.results, isLoading: false });
+// //     } catch (error: unknown) {
+// //       console.log(`The ERROR ${error} occurred`);
+// //     }
+// //   };
+
+// //   componentDidMount() {
+// //     this.fetchData(this.state.searchTerm);
+// //   }
+
+// //   render() {
+// //     return (
+// //       <div className="app">
+// //         <header>Hi! This is an application for searching planets!</header>
+// //         <main>
+// //           <SearchSection onSearch={this.handleSearch} />
+// //           <ResultSection results={this.state.searchResult} />
+// //           <Loading isLoading={this.state.isLoading} />
+// //         </main>
+// //       </div>
+// //     );
+// //   }
+// // }
 
 interface ResultItem {
   url: string;
   name: string;
   terrain: string;
 }
-class App extends React.Component<{}, AppState> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      isLoading: false,
-      searchTerm: localStorage.getItem('searchTerm') || '',
-      searchResult: null,
-    };
-  }
+// function App() {
+//   // const initialTerm = useGetSearchTerm();
+//   // const [{ query, results, isLoading, isError }, setQuery] =
+//   //   useFetchData(initialTerm);
+//   const [searchTerm, setSearchTerm] = useState('');
+//   const [results, setResults] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const baseUrl = `https://swapi.dev/api/planets?search=${searchTerm}`;
 
-  handleSearch = (searchTerm: string) => {
-    this.setState({ searchTerm: searchTerm });
-    this.fetchData(searchTerm);
-  };
+//   useEffect(() => {
+//     const initialSearchTerm = localStorage.getItem('searchTerm');
+//     if (initialSearchTerm) {
+//       setSearchTerm(initialSearchTerm);
+//       fetchData(initialSearchTerm);
+//     } else {
+//       fetchData();
+//     }
+//   }, []);
 
-  fetchData = async (searchTerm: string) => {
-    this.setState({ isLoading: true });
+//   const fetchData = async (query = '') => {
+//     setLoading(true);
+//     try {
+//       const url = `${baseUrl}${query}`;
+//       const response = await fetch(url);
+//       if (!response.ok) {
+//         throw new Error('Error: response is not ok');
+//       }
+//       const data = await response.json();
+//       setResults(data);
+//     } catch (error) {
+//       console.error('Failed to fetch data:', error);
+//       setResults([]);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
 
+//   const handleSearch = () => {
+//     const trimmedSearchTerm = searchTerm.trim();
+//     if (trimmedSearchTerm) {
+//       localStorage.setItem('lastSearchTerm', trimmedSearchTerm);
+//       fetchData(trimmedSearchTerm);
+//     }
+//   };
+
+//   return (
+//     <div className="search-app">
+//       <div className="top-section">
+//         <input
+//           type="text"
+//           value={searchTerm}
+//           onChange={(e) => setSearchTerm(e.target.value)}
+//           placeholder="Search..."
+//         />
+//         <button onClick={handleSearch}>Search</button>
+//         <Loading isLoading={loading} />
+//       </div>
+//       <div className="main-section">
+//         <ul>
+//           {results?.map((item: ResultItem) => (
+//             <li key={item.url}>{item.name}</li>
+//           ))}
+//         </ul>
+//       </div>
+//     </div>
+//   );
+// }
+
+// //   return (
+// //     <div className="app">
+// //       <header>Hi! This is an application for searching planets!</header>
+// //       <main></main>
+// //     </div>
+// //   );
+// // }
+// export default App;
+
+import { useState, useEffect } from 'react';
+import Loading from './components/Loading/Loading';
+
+const baseUrl = 'https://swapi.dev/api/planets/?search=';
+
+function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const storedSearchTerm = localStorage.getItem('searchTerm');
+    if (storedSearchTerm) {
+      setSearchTerm(storedSearchTerm);
+      search(storedSearchTerm);
+    } else {
+      search(''); // Default search term
+    }
+  }, []);
+
+  const search = async (term: string) => {
+    setIsLoading(true);
     try {
-      const response = await fetch(
-        `https://swapi.dev/api/planets?search=${searchTerm}`
-      );
+      const response = await fetch(`${baseUrl}${term}`);
       const data = await response.json();
-      this.setState({ searchResult: data.results, isLoading: false });
-    } catch (error: unknown) {
-      console.log(`The ERROR ${error} occurred`);
+      setResults(data.results);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setResults([]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  componentDidMount() {
-    this.fetchData(this.state.searchTerm);
-  }
+  const handleSearch = () => {
+    localStorage.setItem('searchTerm', searchTerm);
+    search(searchTerm);
+  };
 
-  render() {
-    return (
-      <div className="app">
-        <header>Hi! This is an application for searching planets!</header>
-        <main>
-          <SearchSection onSearch={this.handleSearch} />
-          <ResultSection results={this.state.searchResult} />
-          <Loading isLoading={this.state.isLoading} />
-        </main>
+  return (
+    <div className="">
+      <div className="flex items-center space-x-2 mb-4">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="border rounded px-2 py-1"
+          placeholder="Search..."
+        />
+        <button
+          onClick={handleSearch}
+          className="bg-blue-500 text-white px-4 py-1 rounded"
+        >
+          Search
+        </button>
       </div>
-    );
-  }
+      {/* <SearchSection /> */}
+
+      <ul>
+        {results.map((result: ResultItem) => (
+          <li key={result.url} className="border-b p-2">
+            {result.name}
+          </li>
+        ))}
+      </ul>
+      <Loading isLoading={isLoading} />
+    </div>
+  );
 }
 
 export default App;
