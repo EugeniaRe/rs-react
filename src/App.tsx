@@ -144,18 +144,19 @@ interface ResultItem {
 
 import { useState, useEffect } from 'react';
 import Loading from './components/Loading/Loading';
+import { useGetSearchTerm } from './hooks/useGetSearchTerm';
+import SearchSection from './components/SearchSection/SearchSection';
 
 const baseUrl = 'https://swapi.dev/api/planets/?search=';
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState('');
+  // const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const storedSearchTerm = useGetSearchTerm();
   useEffect(() => {
-    const storedSearchTerm = localStorage.getItem('searchTerm');
     if (storedSearchTerm) {
-      setSearchTerm(storedSearchTerm);
+      // setSearchTerm(storedSearchTerm);
       search(storedSearchTerm);
     } else {
       search(''); // Default search term
@@ -176,29 +177,15 @@ function App() {
     }
   };
 
-  const handleSearch = () => {
-    localStorage.setItem('searchTerm', searchTerm);
+  const handleSearch = (searchTerm: string) => {
+    // localStorage.setItem('searchTerm', searchTerm);
+    // setSearchTerm(searchTerm);
     search(searchTerm);
   };
 
   return (
     <div className="">
-      <div className="flex items-center space-x-2 mb-4">
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="border rounded px-2 py-1"
-          placeholder="Search..."
-        />
-        <button
-          onClick={handleSearch}
-          className="bg-blue-500 text-white px-4 py-1 rounded"
-        >
-          Search
-        </button>
-      </div>
-      {/* <SearchSection /> */}
+      <SearchSection onSearch={handleSearch} />
 
       <ul>
         {results.map((result: ResultItem) => (
