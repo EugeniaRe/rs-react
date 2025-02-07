@@ -1,11 +1,15 @@
 // import React from 'react';
 // import './resultSection.css';
 
-// interface ResultItem {
-//   url: string;
-//   name: string;
-//   terrain: string;
-// }
+interface ResultItem {
+  url: string;
+  name: string;
+  terrain: string;
+}
+
+interface ResultSectionProps {
+  results: ResultItem[];
+}
 
 // // class ResultSection extends React.Component<ResultSectionProps> {
 // //   render() {
@@ -37,4 +41,13 @@
 // //   }
 // // }
 
-// export default ResultSection;
+function ResultSection({ results }: ResultSectionProps) {
+  return (
+    <ul>
+      {results.map((result: ResultItem) => (
+        <li key={result.url}>{result.name}</li>
+      ))}
+    </ul>
+  );
+}
+export default ResultSection;
