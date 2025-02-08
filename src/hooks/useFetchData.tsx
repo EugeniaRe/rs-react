@@ -42,7 +42,7 @@ const BASE_URL = 'https://swapi.dev/api/planets/?';
 export function useFetchData(initialParams: useFetchDataProps) {
   const [params, setParams] = useState(initialParams);
   const [results, setResults] = useState([]);
-  const [resultsCount, setResultsCount] = useState(0);
+  // const [resultsCount, setResultsCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   const storedSearchTerm = useGetSearchTerm();
@@ -61,7 +61,7 @@ export function useFetchData(initialParams: useFetchDataProps) {
       const response = await fetch(`${BASE_URL}${term}`);
       const data = await response.json();
       setResults(data.results);
-      setResultsCount(data.count);
+      // setResultsCount(data.count);
     } catch (error) {
       console.error('Error fetching data:', error);
       setResults([]);
