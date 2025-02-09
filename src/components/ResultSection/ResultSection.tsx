@@ -4,7 +4,6 @@ import './ResultSection.css';
 interface ResultItem {
   url: string;
   name: string;
-  terrain: string;
 }
 
 interface ResultSectionProps {
