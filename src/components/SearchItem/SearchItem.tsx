@@ -42,7 +42,7 @@ function SearchItem() {
       <div>Planet: {planetData.name}</div>
       <div>Climate: {planetData.climate}</div>
       <div>Diameter: {planetData.diameter}</div>
-      <Link to="/planets">
+      <Link to="/">
         <button>Close</button>
       </Link>
       <Loading isLoading={isLoading} />

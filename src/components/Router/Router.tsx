@@ -6,8 +6,8 @@ import NotFound from '../NotFound/NotFound';
 function Router() {
   return (
     <Routes>
-      <Route path="/planets" element={<App />}>
-        <Route path="/planets/:id" element={<SearchItem />} />
+      <Route path="/" element={<App />}>
+        <Route path="/:id" element={<SearchItem />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

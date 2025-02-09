@@ -9,8 +9,7 @@ interface PaginationProps {
 const ITEMS_FOR_PAGE = 10;
 
 function Pagination({ itemsCount, onSearch }: PaginationProps) {
-  const [, setSearchParams] = useSearchParams(); // Hook to access query parameters
-  // const navigate = useNavigate(); // Hook for navigation
+  const [, setSearchParams] = useSearchParams();
 
   const searchTerm = useGetSearchTerm();
   const pagesCount = Math.ceil(itemsCount / ITEMS_FOR_PAGE);
@@ -22,7 +21,7 @@ function Pagination({ itemsCount, onSearch }: PaginationProps) {
 
   return (
     <div>
-      {Array.from({ length: pagesCount }).map((item, index) => (
+      {Array.from({ length: pagesCount }).map((_, index) => (
         <button onClick={() => handleClick(index + 1)} key={index}>
           {index + 1}
         </button>
