@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { BASE_URL } from '../../constants';
 import Loading from '../Loading/Loading';
 
@@ -42,6 +42,9 @@ function SearchItem() {
       <div>Planet: {planetData.name}</div>
       <div>Climate: {planetData.climate}</div>
       <div>Diameter: {planetData.diameter}</div>
+      <Link to="/planets">
+        <button>Close</button>
+      </Link>
       <Loading isLoading={isLoading} />
     </div>
   );

@@ -1,10 +1,10 @@
+import { useState } from 'react';
+import { useGetSearchTerm } from '../../hooks/useGetSearchTerm';
+
 interface SearchSectionProps {
   onSearch: (searchTerm: string) => void;
 }
 
-import { useState } from 'react';
-import { useGetSearchTerm } from '../../hooks/useGetSearchTerm';
-import { Link } from 'react-router-dom';
 function SearchSection({ onSearch }: SearchSectionProps) {
   const lastSearchTerm = useGetSearchTerm();
   const [inputValue, setInputValue] = useState(lastSearchTerm);
@@ -21,9 +21,7 @@ function SearchSection({ onSearch }: SearchSectionProps) {
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Search..."
       />
-      <Link to="/planets">
-        <button onClick={handleSearch}>Search</button>
-      </Link>
+      <button onClick={handleSearch}>Search</button>
     </div>
   );
 }

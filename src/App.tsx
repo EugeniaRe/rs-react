@@ -55,6 +55,7 @@ function App() {
     <>
       <div className="">
         <SearchSection onSearch={handleSearch} />
+        {results.length === 0 && <p>No results found</p>}
         <ResultSection results={results} />
         <Pagination itemsCount={resultsCount} onSearch={handleSearch} />
         <Loading isLoading={isLoading} />
