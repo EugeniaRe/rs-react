@@ -4,6 +4,7 @@ interface SearchSectionProps {
 
 import { useState } from 'react';
 import { useGetSearchTerm } from '../../hooks/useGetSearchTerm';
+import { Link } from 'react-router-dom';
 function SearchSection({ onSearch }: SearchSectionProps) {
   const lastSearchTerm = useGetSearchTerm();
   const [inputValue, setInputValue] = useState(lastSearchTerm);
@@ -20,7 +21,9 @@ function SearchSection({ onSearch }: SearchSectionProps) {
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Search..."
       />
-      <button onClick={handleSearch}>Search</button>
+      <Link to="/planets">
+        <button onClick={handleSearch}>Search</button>
+      </Link>
     </div>
   );
 }

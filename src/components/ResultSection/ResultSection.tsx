@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import './ResultSection.css';
+
 interface ResultItem {
   url: string;
   name: string;
@@ -10,11 +13,13 @@ interface ResultSectionProps {
 
 function ResultSection({ results }: ResultSectionProps) {
   return (
-    <ul>
+    <div className="results-list">
       {results.map((result: ResultItem) => (
-        <li key={result.url}>{result.name}</li>
+        <Link to={`/planets/${result.name}`} key={result.url}>
+          {result.name}
+        </Link>
       ))}
-    </ul>
+    </div>
   );
 }
 export default ResultSection;

@@ -1,4 +1,6 @@
+import { Link, useSearchParams } from 'react-router-dom';
 import { useGetSearchTerm } from '../../hooks/useGetSearchTerm';
+import './Pagination.css';
 
 interface PaginationProps {
   itemsCount: number;
@@ -8,9 +10,12 @@ interface PaginationProps {
 const ITEMS_FOR_PAGE = 10;
 
 function Pagination({ itemsCount, onSearch }: PaginationProps) {
+  const [, setSearchParams] = useSearchParams();
+
   const searchTerm = useGetSearchTerm();
   const pagesCount = Math.ceil(itemsCount / ITEMS_FOR_PAGE);
   const handleClick = (value: number) => {
+    setSearchParams({ page: String(value) });
     onSearch(searchTerm, value);
     console.log(value);
   };
@@ -18,9 +23,14 @@ function Pagination({ itemsCount, onSearch }: PaginationProps) {
   return (
     <div>
       {Array.from({ length: pagesCount }).map((item, index) => (
-        <button onClick={() => handleClick(index + 1)} key={index}>
+        <Link
+          className="page-link"
+          to={'/planets'}
+          onClick={() => handleClick(index + 1)}
+          key={index}
+        >
           {index + 1}
-        </button>
+        </Link>
       ))}
     </div>
   );

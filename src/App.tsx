@@ -4,10 +4,14 @@ import { useGetSearchTerm } from './hooks/useGetSearchTerm';
 import SearchSection from './components/SearchSection/SearchSection';
 import ResultSection from './components/ResultSection/ResultSection';
 import Pagination from './components/Pagination/Pagination';
-
-const BASE_URL = 'https://swapi.dev/api/planets/';
+import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
+import { BASE_URL } from './constants';
+import './App.css';
 
 function App() {
+  const location = useLocation();
+  const [, setSearchParams] = useSearchParams();
+
   const [results, setResults] = useState([]);
   const [resultsCount, setResultsCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +26,11 @@ function App() {
     }
   }, []);
 
-  const search = async (term: string, pageNumber: number = 1) => {
+  const search = async (term: string, pageNumber?: number) => {
+    const oldPageNumber =
+      Number(new URLSearchParams(location.search).get('page')) || 1;
+    pageNumber = pageNumber || oldPageNumber;
+    setSearchParams({ page: String(pageNumber), search: term });
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -44,12 +52,15 @@ function App() {
   };
 
   return (
-    <div className="">
-      <SearchSection onSearch={handleSearch} />
-      <ResultSection results={results} />
-      <Pagination itemsCount={resultsCount} onSearch={handleSearch} />
-      <Loading isLoading={isLoading} />
-    </div>
+    <>
+      <div className="">
+        <SearchSection onSearch={handleSearch} />
+        <ResultSection results={results} />
+        <Pagination itemsCount={resultsCount} onSearch={handleSearch} />
+        <Loading isLoading={isLoading} />
+      </div>
+      <Outlet />
+    </>
   );
 }
 
