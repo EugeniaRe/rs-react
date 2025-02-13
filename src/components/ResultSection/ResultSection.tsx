@@ -14,7 +14,7 @@ function ResultSection({ results }: ResultSectionProps) {
   return (
     <div className="results-list">
       {results.map((result: ResultItem) => (
-        <Link to={`/${result.name}`} key={result.url}>
+        <Link to={`items/${result.name}`} key={result.url}>
           {result.name}
         </Link>
       ))}

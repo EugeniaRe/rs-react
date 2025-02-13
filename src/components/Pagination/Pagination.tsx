@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { useGetSearchTerm } from '../../hooks/useGetSearchTerm';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 interface PaginationProps {
   itemsCount: number;
@@ -11,11 +11,11 @@ const ITEMS_FOR_PAGE = 10;
 function Pagination({ itemsCount, onSearch }: PaginationProps) {
   const [, setSearchParams] = useSearchParams();
 
-  const searchTerm = useGetSearchTerm();
+  const [storedValue] = useLocalStorage('searchTerm');
   const pagesCount = Math.ceil(itemsCount / ITEMS_FOR_PAGE);
   const handleClick = (value: number) => {
     setSearchParams({ page: String(value) });
-    onSearch(searchTerm, value);
+    onSearch(storedValue, value);
     console.log(value);
   };
 
