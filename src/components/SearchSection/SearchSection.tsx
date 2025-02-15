@@ -2,26 +2,24 @@ import { useState } from 'react';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 interface SearchSectionProps {
-  onSearch: (searchTerm: string) => void;
+  onSearch: (term: string) => void;
 }
 
 function SearchSection({ onSearch }: SearchSectionProps) {
   const [storedValue] = useLocalStorage('searchTerm');
   const [inputValue, setInputValue] = useState(storedValue);
-  const handleSearch = () => {
-    localStorage.setItem('searchTerm', inputValue);
-    console.log(inputValue);
-    onSearch(inputValue);
+  const handleSearch = (term: string) => {
+    onSearch(term);
   };
   return (
     <div className="">
       <input
-        type="text"
+        type="search "
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Search..."
       />
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={() => handleSearch(inputValue)}>Search</button>
     </div>
   );
 }

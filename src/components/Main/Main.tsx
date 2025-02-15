@@ -1,66 +1,59 @@
 import { useState, useEffect } from 'react';
-import Loading from '../Loading/Loading';
 import SearchSection from '../SearchSection/SearchSection';
-import ResultSection from '../ResultSection/ResultSection';
 import Pagination from '../Pagination/Pagination';
-import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
-import { BASE_URL } from '../../constants';
-import './Main.css';
+import { Outlet } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { useGetPlanetsQuery } from '../../store/api/api';
+import Loading from '../Loading/Loading';
+import Card from '../Card/Card';
+import { IResultItem } from '../../interfaces/interfaces';
+import Flyout from '../Flyout/Flyout';
+import './Main.css';
 
 function Main() {
-  const location = useLocation();
-  const [, setSearchParams] = useSearchParams();
+  const [searchTerm, setSearchTerm] = useLocalStorage('searchTerm');
 
-  const [results, setResults] = useState([]);
-  const [resultsCount, setResultsCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [queryTerm, setQueryTerm] = useState(searchTerm);
 
-  const [storedSearchTerm] = useLocalStorage('searchTerm');
+  const [activePage, setActivePage] = useState(1);
+  const { data, isLoading } = useGetPlanetsQuery({
+    searchTerm: queryTerm,
+    page: activePage,
+  });
 
-  // console.log(storedSearchTerm);
   useEffect(() => {
-    if (storedSearchTerm) {
-      search(storedSearchTerm);
-    } else {
-      search('');
-    }
-  }, [storedSearchTerm]);
+    handleSearch(searchTerm);
+  }, [searchTerm]);
 
-  const search = async (term: string, pageNumber?: number) => {
-    // console.log('search term', term);
-    const oldPageNumber =
-      Number(new URLSearchParams(location.search).get('page')) || 1;
-    pageNumber = pageNumber || oldPageNumber;
-    setSearchParams({ page: String(pageNumber), search: term });
-    setIsLoading(true);
-    try {
-      const response = await fetch(
-        `${BASE_URL}?search=${term}&page=${pageNumber}`
-      );
-      const data = await response.json();
-      setResults(data.results);
-      setResultsCount(data.count);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setResults([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSearch = async (searchTerm: string, pageNumber: number = 1) => {
-    await search(searchTerm, pageNumber);
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+    setQueryTerm(searchTerm);
+    setActivePage(1);
   };
 
   return (
     <>
       <div className="">
         <SearchSection onSearch={handleSearch} />
-        {results.length === 0 && <p>No results found</p>}
-        <ResultSection results={results} />
-        <Pagination itemsCount={resultsCount} onSearch={handleSearch} />
-        <Loading isLoading={isLoading} />
+        <div className="results-list">
+          {isLoading ? (
+            <Loading />
+          ) : data?.results && data?.results.length !== 0 ? (
+            data.results.map((result: IResultItem) => (
+              <Card key={result.url} result={result} />
+            ))
+          ) : (
+            <div>Items Not Found</div>
+          )}
+        </div>
+        <Pagination
+          itemsCount={data?.count || 0}
+          onClick={(page) => {
+            setActivePage(page);
+          }}
+        />
+        {isLoading && <Loading />}
+        <Flyout />
       </div>
       <Outlet />
     </>
