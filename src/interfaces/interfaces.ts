@@ -4,3 +4,8 @@ export interface IResultItem {
   climate?: string;
   diameter?: string;
 }
+
+export interface IThemeContext {
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
+}

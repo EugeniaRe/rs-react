@@ -9,8 +9,10 @@ import Card from '../Card/Card';
 import { IResultItem } from '../../interfaces/interfaces';
 import Flyout from '../Flyout/Flyout';
 import './Main.css';
+import useThemeContext from '../../hooks/useThemeContext';
 
 function Main() {
+  const { theme, toggleTheme } = useThemeContext();
   const [searchTerm, setSearchTerm] = useLocalStorage('searchTerm');
 
   const [queryTerm, setQueryTerm] = useState(searchTerm);
@@ -33,29 +35,36 @@ function Main() {
 
   return (
     <>
-      <div className="">
-        <SearchSection onSearch={handleSearch} />
-        <div className="results-list">
-          {isLoading ? (
-            <Loading />
-          ) : data?.results && data?.results.length !== 0 ? (
-            data.results.map((result: IResultItem) => (
-              <Card key={result.url} result={result} />
-            ))
-          ) : (
-            <div>Items Not Found</div>
-          )}
+      <div
+        className={`main-page-wrapper ${theme === 'dark' ? 'dark' : 'light'}`}
+      >
+        <div className="main-page">
+          <button onClick={toggleTheme}>
+            {`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
+          </button>
+          <SearchSection onSearch={handleSearch} />
+          <div className="results-list">
+            {isLoading ? (
+              <Loading />
+            ) : data?.results && data?.results.length !== 0 ? (
+              data.results.map((result: IResultItem) => (
+                <Card key={result.url} result={result} />
+              ))
+            ) : (
+              <div>Items Not Found</div>
+            )}
+          </div>
+          <Pagination
+            itemsCount={data?.count || 0}
+            onClick={(page) => {
+              setActivePage(page);
+            }}
+          />
+          {isLoading && <Loading />}
+          <Flyout />
         </div>
-        <Pagination
-          itemsCount={data?.count || 0}
-          onClick={(page) => {
-            setActivePage(page);
-          }}
-        />
-        {isLoading && <Loading />}
-        <Flyout />
+        <Outlet />
       </div>
-      <Outlet />
     </>
   );
 }

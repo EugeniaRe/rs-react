@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import styles from './SearchSection.module.css';
 
 interface SearchSectionProps {
   onSearch: (term: string) => void;
@@ -12,7 +13,7 @@ function SearchSection({ onSearch }: SearchSectionProps) {
     onSearch(term);
   };
   return (
-    <div className="">
+    <div className={styles.container}>
       <input
         type="search "
         value={inputValue}

@@ -1,12 +1,43 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  display: flex;
-  gap: 25px;
+  width: 100%;
+  min-height: 100vh;
 }
 
+.main-page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  padding: 20px 0;
+}
+
+.main-page {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 20px 0;
+}
+
+.dark {
+  background-color: #242424;
+  color: #dbdbdb;
+}
+
+.dark a {
+  font-weight: 500;
+  color: #bbbefd;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #868cf8;
+}
+
+.dark button {
+  background-color: #3339a8;
+  color: #dbdbdb;
+}
+
+.dark 
 header {
   padding-bottom: 50px;
 }

@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import { useGetPlanetQuery } from '../../store/api/api';
 import { skipToken } from '@reduxjs/toolkit/query';
+import styles from './DetailedCard.module.css';
 
 function SearchItem() {
   const { id } = useParams();
@@ -11,7 +12,7 @@ function SearchItem() {
   );
 
   return (
-    <div>
+    <div className={styles.container}>
       {planet && (
         <div>
           <div>Planet: {planet.name}</div>

@@ -1,6 +1,7 @@
 .flyout {
   min-width: 300px;
   height: 50px;
+  margin: 5px 0;
   padding: 5px 10px;
   display: flex;
   gap: 10px;
@@ -11,13 +12,11 @@
   transition: all 300ms ease-in-out;
 }
 
-/* When the panel is open, it is fully visible */
 .flyout-open {
   transform: translateY(0);
   opacity: 1;
 }
 
-/* When the panel is closed, it is moved outside the viewport */
 .flyout-closed {
   transform: translateY(100%);
   opacity: 0;

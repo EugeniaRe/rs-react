@@ -1,4 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
+import styles from './Pagination.module.css';
 
 interface PaginationProps {
   itemsCount: number;
@@ -17,7 +18,11 @@ function Pagination({ itemsCount, onClick }: PaginationProps) {
   return (
     <div>
       {Array.from({ length: pagesCount }).map((_, index) => (
-        <button onClick={() => handlePageClick(index + 1)} key={index}>
+        <button
+          className={styles.btn}
+          onClick={() => handlePageClick(index + 1)}
+          key={index}
+        >
           {index + 1}
         </button>
       ))}
