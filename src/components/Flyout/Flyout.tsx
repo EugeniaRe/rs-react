@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import useSelectedItems from '../../hooks/useSelectedItems';
 import { actions } from '../../store/selectedItems/selectedItems.slice';
 import { useEffect, useState } from 'react';
-import './Flyout.css';
+import styles from './Flyout.module.css';
 
 function Flyout() {
   const [isFlyoutOpen, setIsFlyoutOpen] = useState(false);
@@ -43,7 +43,9 @@ function Flyout() {
   };
 
   return (
-    <div className={`flyout ${isFlyoutOpen ? 'flyout-open' : 'flyout-closed'}`}>
+    <div
+      className={`${styles.flyout} ${isFlyoutOpen ? styles.open : styles.closed}`}
+    >
       <div>Selected elements: {selectedItems.length}</div>
       <button onClick={handleUnselectAll}>Unselect all</button>
       <button onClick={downloadCSV}>Download</button>
