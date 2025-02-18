@@ -8,7 +8,7 @@ interface CardListProps {
   searchTerm: string;
 }
 
-function ResultSection({ searchTerm }: CardListProps) {
+function CardList({ searchTerm }: CardListProps) {
   const { isLoading, data } = useGetPlanetsQuery(searchTerm);
   return (
     <div className="results-list">
@@ -24,4 +24,4 @@ function ResultSection({ searchTerm }: CardListProps) {
     </div>
   );
 }
-export default ResultSection;
+export default CardList;

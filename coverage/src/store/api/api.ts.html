@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -96,8 +96,8 @@
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -105,32 +105,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
-<span class="cstat-no" title="statement not covered" >import { BASE_URL } from '../../constants';</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { BASE_URL } from '../../constants';
 import { IResultItem } from '../../interfaces/interfaces';
 &nbsp;
 // interface IParams {
@@ -138,30 +138,30 @@ import { IResultItem } from '../../interfaces/interfaces';
 //   page?: number;
 // }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export const api = createApi({</span>
-<span class="cstat-no" title="statement not covered" >  reducerPath: 'api',</span>
-<span class="cstat-no" title="statement not covered" >  baseQuery: fetchBaseQuery({</span>
-<span class="cstat-no" title="statement not covered" >    baseUrl: BASE_URL,</span>
-<span class="cstat-no" title="statement not covered" >  }),</span>
+export const api = createApi({
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({
+    baseUrl: BASE_URL,
+  }),
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  endpoints: (builder) =&gt; ({</span>
-<span class="cstat-no" title="statement not covered" >    getPlanets: builder.query&lt;</span>
+  endpoints: (builder) =&gt; ({
+    getPlanets: builder.query&lt;
       { count: number; results: IResultItem[] },
       {
         searchTerm: string;
         page?: number;
       }
-<span class="cstat-no" title="statement not covered" >    &gt;({</span>
-<span class="cstat-no" title="statement not covered" >      query: ({ searchTerm, page = 1 }) =&gt; `?search=${searchTerm}&amp;page=${page}`,</span>
-<span class="cstat-no" title="statement not covered" >    }),</span>
+    &gt;({
+      query: <span class="fstat-no" title="function not covered" >({ searchTerm, page = 1 }) =&gt; `?search=${searchTerm}&amp;page=${page}`,</span>
+    }),
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    getPlanet: builder.query&lt;IResultItem, string&gt;({</span>
-<span class="cstat-no" title="statement not covered" >      query: (id) =&gt; `/${id}`,</span>
-<span class="cstat-no" title="statement not covered" >    }),</span>
-<span class="cstat-no" title="statement not covered" >  }),</span>
-<span class="cstat-no" title="statement not covered" >});</span>
+    getPlanet: builder.query&lt;IResultItem, string&gt;({
+      query: <span class="fstat-no" title="function not covered" >(id) =&gt; `/${id}`,</span>
+    }),
+  }),
+});
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export const { useGetPlanetsQuery, useGetPlanetQuery } = api;</span>
+export const { useGetPlanetsQuery, useGetPlanetQuery } = api;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -169,7 +169,7 @@ import { IResultItem } from '../../interfaces/interfaces';
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-18T18:20:34.530Z
+                at 2025-02-18T20:00:13.835Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
