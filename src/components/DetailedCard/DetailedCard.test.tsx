@@ -24,7 +24,7 @@ const createMockStore = () => {
   });
 };
 
-describe('DetailedCard Component', () => {
+describe('DetailedCard', () => {
   it('renders close button', () => {
     const store = createMockStore();
     render(

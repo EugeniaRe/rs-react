@@ -24,7 +24,7 @@ const createMockStore = (initialState = []) => {
   });
 };
 
-describe('Card', () => {
+describe('Flyout', () => {
   it('shows amount of selected items', () => {
     const selectedItems = [planetExample];
     const store = createMockStore(selectedItems);
