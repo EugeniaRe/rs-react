@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { actions } from '../../store/selectedItems/selectedItems.slice';
 import useSelectedItems from '../../hooks/useSelectedItems';
 
-interface ICard {
+export interface ICard {
   result: IResultItem;
 }
 
@@ -13,9 +13,9 @@ function Card({ result }: ICard) {
 
   const dispatch = useDispatch();
 
-  const isSelected = selectedItems.some(
-    (item: IResultItem) => item.url === result.url
-  );
+  const isSelected =
+    selectedItems &&
+    selectedItems.some((item: IResultItem) => item.url === result.url);
 
   const handleClick = () => {
     dispatch(actions.toggleSelectedItems(result));

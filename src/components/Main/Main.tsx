@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 import SearchSection from '../SearchSection/SearchSection';
 import Pagination from '../Pagination/Pagination';
-import { Outlet } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useGetPlanetsQuery } from '../../store/api/api';
 import Loading from '../Loading/Loading';
 import Card from '../Card/Card';
 import { IResultItem } from '../../interfaces/interfaces';
 import Flyout from '../Flyout/Flyout';
-import './Main.css';
 import useThemeContext from '../../hooks/useThemeContext';
+import './Main.css';
 
 function Main() {
   const { theme, toggleTheme } = useThemeContext();

@@ -10,10 +10,10 @@ const rootContainer = document.getElementById('root');
 if (rootContainer !== null)
   createRoot(rootContainer).render(
     <StrictMode>
-      <Provider store={store}>
-        <BrowserRouter>
+      <BrowserRouter>
+        <Provider store={store}>
           <App />
-        </BrowserRouter>
-      </Provider>
+        </Provider>
+      </BrowserRouter>
     </StrictMode>
   );

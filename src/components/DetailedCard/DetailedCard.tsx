@@ -4,7 +4,7 @@ import { useGetPlanetQuery } from '../../store/api/api';
 import { skipToken } from '@reduxjs/toolkit/query';
 import styles from './DetailedCard.module.css';
 
-function SearchItem() {
+function DetailedCard() {
   const { id } = useParams();
 
   const { data: planet, isLoading: isLoadingPlanet } = useGetPlanetQuery(
@@ -28,4 +28,4 @@ function SearchItem() {
   );
 }
 
-export default SearchItem;
+export default DetailedCard;
