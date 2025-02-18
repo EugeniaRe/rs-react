@@ -45,6 +45,7 @@ function Flyout() {
   return (
     <div
       className={`${styles.flyout} ${isFlyoutOpen ? styles.open : styles.closed}`}
+      data-testid="flyout"
     >
       <div>Selected elements: {selectedItems.length}</div>
       <button onClick={handleUnselectAll}>Unselect all</button>
