@@ -1,7 +1,4 @@
 import './Loading.css';
-// interface LoadingProps {
-//   isLoading: boolean;
-// }
 
 const Loading = () => {
   return (

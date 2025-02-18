@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import '@testing-library/jest-dom';
@@ -38,22 +38,33 @@ describe('Card', () => {
     expect(screen.getByText('Selected elements: 1')).toBeInTheDocument();
   });
 
-  //   it('closes flyout', () => {
-  //     const selectedItems = [planetExample];
-  //     const store = createMockStore(selectedItems);
+  it('sets selected elements to 0 by clicking Unselect all', () => {
+    const selectedItems = [planetExample];
+    const store = createMockStore(selectedItems);
 
-  //     render(
-  //       <Provider store={store}>
-  //         <Flyout />
-  //       </Provider>
-  //     );
+    render(
+      <Provider store={store}>
+        <Flyout />
+      </Provider>
+    );
 
-  //     const unselectAllButton = screen.getByRole('button', {
-  //       name: /unselect all/i,
-  //     });
-  //     fireEvent.click(unselectAllButton);
+    fireEvent.click(screen.getByRole('button', { name: /unselect all/i }));
 
-  //     const flyout = screen.getByTestId('flyout');
-  //     expect(flyout).toHaveClass('closed');
-  //   });
+    expect(screen.getByText('Selected elements: 0')).toBeInTheDocument();
+  });
+
+  it('checks if download button is rendered', () => {
+    const selectedItems = [planetExample];
+    const store = createMockStore(selectedItems);
+
+    render(
+      <Provider store={store}>
+        <Flyout />
+      </Provider>
+    );
+
+    expect(
+      screen.getByRole('button', { name: /download/i })
+    ).toBeInTheDocument();
+  });
 });
