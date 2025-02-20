@@ -4,9 +4,7 @@ import { renderHook } from '@testing-library/react';
 
 describe('useLocalStorage', () => {
   it('should set and get localStorage value', () => {
-    const { result } = renderHook(() =>
-      useLocalStorage('testKey', 'testValue')
-    );
+    renderHook(() => useLocalStorage('testKey', 'testValue'));
 
     expect(localStorage.getItem('testKey')).toBe('testValue');
   });
