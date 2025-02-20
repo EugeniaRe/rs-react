@@ -1,9 +1,9 @@
+import '@testing-library/jest-dom';
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
-import '@testing-library/jest-dom';
 import Card from './Card';
 import { reducer } from '../../store/selectedItems/selectedItems.slice';
 

@@ -10,7 +10,8 @@ function SearchSection({ onSearch }: SearchSectionProps) {
   const [storedValue] = useLocalStorage('searchTerm');
   const [inputValue, setInputValue] = useState(storedValue);
   const handleSearch = (term: string) => {
-    onSearch(term);
+    const trimmedTerm = term.trim();
+    onSearch(trimmedTerm);
   };
   return (
     <div className={styles.container}>

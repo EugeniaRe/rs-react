@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import DetailedCard from './components/DetailedCard/DetailedCard';
 import Main from './components/Main/Main';
 import NotFound from './components/NotFound/NotFound';
-import ThemeProvider from './components/ThemeContext/ThemeContext';
+import ThemeProvider from './components/ThemeProvider/ThemeProvider';
 
 function App() {
   return (

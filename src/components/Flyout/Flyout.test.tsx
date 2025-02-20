@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import '@testing-library/jest-dom';
+import { describe, it, expect, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import '@testing-library/jest-dom';
 import Flyout from './Flyout';
 import { reducer } from '../../store/selectedItems/selectedItems.slice';
 
@@ -12,6 +12,8 @@ const planetExample = {
   climate: 'Arid',
   diameter: '10465',
 };
+
+global.URL.createObjectURL = vi.fn();
 
 const createMockStore = (initialState = []) => {
   return configureStore({
@@ -53,7 +55,7 @@ describe('Flyout', () => {
     expect(screen.getByText('Selected elements: 0')).toBeInTheDocument();
   });
 
-  it('checks if download button is rendered', () => {
+  it('renders download button', () => {
     const selectedItems = [planetExample];
     const store = createMockStore(selectedItems);
 

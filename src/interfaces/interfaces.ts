@@ -9,3 +9,8 @@ export interface IThemeContext {
   theme: 'light' | 'dark';
   toggleTheme: () => void;
 }
+
+export interface IResultData {
+  results: IResultItem[];
+  count: number;
+}

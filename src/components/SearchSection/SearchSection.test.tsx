@@ -1,6 +1,6 @@
+import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
-import '@testing-library/jest-dom';
 import SearchSection from './SearchSection';
 
 describe('SearchSection', () => {

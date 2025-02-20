@@ -3,7 +3,7 @@ import { IThemeContext } from '../../interfaces/interfaces';
 
 export const ThemeContext = createContext<IThemeContext | undefined>(undefined);
 
-interface ThemeProviderProps {
+export interface ThemeProviderProps {
   children: React.ReactNode;
 }
 

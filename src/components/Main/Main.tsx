@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import SearchSection from '../SearchSection/SearchSection';
-import Pagination from '../Pagination/Pagination';
+import { IResultData } from '../../interfaces/interfaces';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import { useGetPlanetsQuery } from '../../store/api/api';
-import Loading from '../Loading/Loading';
-import Card from '../Card/Card';
-import { IResultItem } from '../../interfaces/interfaces';
-import Flyout from '../Flyout/Flyout';
 import useThemeContext from '../../hooks/useThemeContext';
+import Pagination from '../Pagination/Pagination';
+import SearchSection from '../SearchSection/SearchSection';
+import Flyout from '../Flyout/Flyout';
+import CardList from '../CardList/CardList';
 import './Main.css';
 
 function Main() {
@@ -18,9 +16,10 @@ function Main() {
   const [queryTerm, setQueryTerm] = useState(searchTerm);
 
   const [activePage, setActivePage] = useState(1);
-  const { data, isLoading } = useGetPlanetsQuery({
-    searchTerm: queryTerm,
-    page: activePage,
+
+  const [resultsData, setResultsData] = useState<IResultData>({
+    count: 0,
+    results: [],
   });
 
   useEffect(() => {
@@ -43,24 +42,15 @@ function Main() {
             {`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
           </button>
           <SearchSection onSearch={handleSearch} />
-          <div className="results-list">
-            {isLoading ? (
-              <Loading />
-            ) : data?.results && data?.results.length !== 0 ? (
-              data.results.map((result: IResultItem) => (
-                <Card key={result.url} result={result} />
-              ))
-            ) : (
-              <div>Items Not Found</div>
-            )}
-          </div>
-          <Pagination
-            itemsCount={data?.count || 0}
-            onClick={(page) => {
-              setActivePage(page);
-            }}
+          <CardList
+            searchTerm={queryTerm}
+            activePage={activePage}
+            setData={setResultsData}
           />
-          {isLoading && <Loading />}
+          <Pagination
+            itemsCount={resultsData?.count || 0}
+            onClick={setActivePage}
+          />
           <Flyout />
         </div>
         <Outlet />

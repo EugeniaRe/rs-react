@@ -10,11 +10,6 @@ export const store = configureStore({
   reducer: reducers,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),
-  // posts: postsReducer,
-  // comments: commentsReducer,
-  // users: usersReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-
-// export type AppDispatch = typeof store.dispatch;

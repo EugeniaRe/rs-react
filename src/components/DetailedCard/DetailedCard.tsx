@@ -13,13 +13,12 @@ function DetailedCard() {
 
   return (
     <div className={styles.container}>
-      {planet && (
-        <div>
-          <div>Planet: {planet.name}</div>
-          <div>Climate: {planet.climate}</div>
-          <div>Diameter: {planet.diameter}</div>
-        </div>
-      )}
+      <div>
+        <div>Planet: {planet?.name}</div>
+        <div>Climate: {planet?.climate}</div>
+        <div>Diameter: {planet?.diameter}</div>
+      </div>
+
       <Link to="/">
         <button>Close</button>
       </Link>
