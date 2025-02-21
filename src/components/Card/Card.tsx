@@ -1,12 +1,9 @@
 import { Link } from 'react-router-dom';
-import { IResultItem } from '../../interfaces/interfaces';
+import { ICard, IResultItem } from '../../interfaces/interfaces';
 import { useDispatch } from 'react-redux';
 import { actions } from '../../store/selectedItems/selectedItems.slice';
 import useSelectedItems from '../../hooks/useSelectedItems';
-
-export interface ICard {
-  result: IResultItem;
-}
+import styles from './Card.module.css';
 
 function Card({ result }: ICard) {
   const { selectedItems } = useSelectedItems();
@@ -19,23 +16,20 @@ function Card({ result }: ICard) {
 
   const handleClick = () => {
     dispatch(actions.toggleSelectedItems(result));
-    console.log(selectedItems);
   };
 
   const planetId = result.url.split('/')[5];
 
   return (
-    <div>
+    <Link to={`items/${planetId}`} className={styles.card}>
       <input
         type="checkbox"
         className="checkbox"
         checked={isSelected}
         onChange={handleClick}
       />
-      <Link to={`items/${planetId}`} className="link">
-        {result.name}
-      </Link>
-    </div>
+      <span>{result.name}</span>
+    </Link>
   );
 }
 

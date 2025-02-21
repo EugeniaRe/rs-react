@@ -14,3 +14,7 @@ export interface IResultData {
   results: IResultItem[];
   count: number;
 }
+
+export interface ICard {
+  result: IResultItem;
+}

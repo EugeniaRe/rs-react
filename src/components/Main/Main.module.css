@@ -3,19 +3,21 @@
   min-height: 100vh;
 }
 
-.main-page-wrapper {
+.main_page_wrapper {
+  width: 100%;
   min-height: 100vh;
   display: flex;
-  padding: 20px 0;
 }
 
-.main-page {
-  width: 70%;
+.main_page {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 2%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-  padding: 20px 0;
+  gap: 20px;
 }
 
 .dark {
@@ -37,7 +39,6 @@ a:hover {
   color: #dbdbdb;
 }
 
-.dark 
-header {
+.dark header {
   padding-bottom: 50px;
 }

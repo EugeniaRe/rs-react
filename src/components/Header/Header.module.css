@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 10px 2%;
+  background-color: #646cff;
+  color: white;
+}
+
+.theme_btn {
+  width: 100px;
+  height: 40px;
+  padding: 1px;
+  font-size: 0.8em;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.theme_btn:hover {
+  border-color: #505050;
+}
+
+@media screen and (max-width: 470px) {
+  .theme_btn {
+    width: 80px;
+    height: 35px;
+  }
+}

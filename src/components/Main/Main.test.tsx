@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
@@ -70,19 +70,11 @@ describe('Main', () => {
     (useLocalStorage as vi.Mock).mockReturnValue(['', mockSetSearchTerm]);
   });
 
-  it('renders switch theme button', () => {
+  it('renders title', () => {
     renderMain();
-    const switchButton = screen.getByRole('button', {
-      name: /Switch to/i,
-    });
-    expect(switchButton).toBeInTheDocument();
-  });
 
-  it('toggles theme when clicking the switch theme button', () => {
-    renderMain();
-    const switchButton = screen.getByRole('button', { name: /Switch to/i });
-    fireEvent.click(switchButton);
-
-    expect(mockToggleTheme).toHaveBeenCalled();
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      'Search for a planet'
+    );
   });
 });

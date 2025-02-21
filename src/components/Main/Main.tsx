@@ -7,10 +7,10 @@ import Pagination from '../Pagination/Pagination';
 import SearchSection from '../SearchSection/SearchSection';
 import Flyout from '../Flyout/Flyout';
 import CardList from '../CardList/CardList';
-import './Main.css';
+import styles from './Main.module.css';
 
 function Main() {
-  const { theme, toggleTheme } = useThemeContext();
+  const { theme } = useThemeContext();
   const [searchTerm, setSearchTerm] = useLocalStorage('searchTerm');
 
   const [queryTerm, setQueryTerm] = useState(searchTerm);
@@ -35,12 +35,15 @@ function Main() {
   return (
     <>
       <div
-        className={`main-page-wrapper ${theme === 'dark' ? 'dark' : 'light'}`}
+        className={`${styles.main_page_wrapper} ${theme === 'dark' ? 'dark' : 'light'}`}
       >
-        <div className="main-page">
-          <button onClick={toggleTheme}>
-            {`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
-          </button>
+        <div className={styles.main_page}>
+          <h1>Search for a planet</h1>
+
+          <p>
+            A Planet resource is a large mass, planet or planetoid in the Star
+            Wars Universe, at the time of 0 ABY
+          </p>
           <SearchSection onSearch={handleSearch} />
           <CardList
             searchTerm={queryTerm}

@@ -13,6 +13,7 @@ function DetailedCard() {
 
   return (
     <div className={styles.container}>
+      <img src="/planet_favicon.svg" alt="planet image" />
       <div>
         <div>Planet: {planet?.name}</div>
         <div>Climate: {planet?.climate}</div>
