@@ -1,0 +1,19 @@
+.light &.container {
+  color: #dbdbdb;
+}
+
+.container {
+  width: 40%;
+  padding: 10% 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-color: #505050;
+  color: #dbdbdb;
+}
+
+.container img {
+  max-width: 250px;
+  max-height: 250px;
+}
