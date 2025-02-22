@@ -39,8 +39,6 @@ vi.mock('../../components/CardList/CardList', () => {
 const planetExample = {
   name: 'Tatooine',
   url: 'https://swapi.dev/api/planets/1/',
-  climate: 'Arid',
-  diameter: '10465',
 };
 
 const selectedItems = [planetExample];

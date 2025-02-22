@@ -21,15 +21,17 @@ function Card({ result }: ICard) {
   const planetId = result.url.split('/')[5];
 
   return (
-    <Link to={`items/${planetId}`} className={styles.card}>
+    <div className={styles.card}>
       <input
         type="checkbox"
         className="checkbox"
         checked={isSelected}
         onChange={handleClick}
       />
-      <span>{result.name}</span>
-    </Link>
+      <Link to={`items/${planetId}`} className={styles.name}>
+        {result.name}
+      </Link>
+    </div>
   );
 }
 

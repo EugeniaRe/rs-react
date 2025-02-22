@@ -15,7 +15,7 @@ const planetExample = {
 
 global.URL.createObjectURL = vi.fn();
 
-const createMockStore = (initialState = []) => {
+const createMockStore = (initialState = [{ name: '', url: '' }]) => {
   return configureStore({
     reducer: {
       selectedItems: reducer,

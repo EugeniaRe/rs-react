@@ -7,7 +7,7 @@ import Pagination from '../Pagination/Pagination';
 import SearchSection from '../SearchSection/SearchSection';
 import Flyout from '../Flyout/Flyout';
 import CardList from '../CardList/CardList';
-import styles from './Main.module.css';
+import './Main.css';
 
 function Main() {
   const { theme } = useThemeContext();
@@ -35,9 +35,9 @@ function Main() {
   return (
     <>
       <div
-        className={`${styles.main_page_wrapper} ${theme === 'dark' ? 'dark' : 'light'}`}
+        className={`main_page_wrapper ${theme === 'dark' ? 'dark' : 'light'}`}
       >
-        <div className={styles.main_page}>
+        <div className="main_page">
           <h1>Search for a planet</h1>
 
           <p>

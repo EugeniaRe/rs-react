@@ -12,7 +12,7 @@ const resultExample = {
   url: 'https://swapi.dev/api/planets/1/',
 };
 
-const createMockStore = (initialState = []) => {
+const createMockStore = (initialState = [{ name: '', url: '' }]) => {
   return configureStore({
     reducer: {
       selectedItems: reducer,
