@@ -11,6 +11,7 @@ export default defineConfig({
     // setupFiles: 'tests/setup.ts',
     exclude: [...configDefaults.exclude, 'src/App.tsx', 'src/main.tsx'],
     coverage: {
+      include: ['**/*.tsx'],
       exclude: [
         'src/App.tsx',
         'src/main.tsx',
