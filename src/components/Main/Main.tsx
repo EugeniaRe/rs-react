@@ -47,10 +47,9 @@ function Main() {
   return (
     <>
       <div
-        // className={`main_page_wrapper ${theme === 'dark' ? 'dark' : 'light'}`}
         className={`${styles.main_page_wrapper} ${theme === 'dark' ? 'dark' : 'light'}`}
       >
-        <div className="main_page">
+        <div className={`${styles.main_page}`}>
           <h1>Search for a planet</h1>
 
           <p>
