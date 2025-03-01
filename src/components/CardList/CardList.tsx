@@ -7,16 +7,16 @@ import styles from './CardList.module.css';
 interface CardListProps {
   searchTerm: string;
   activePage: number;
-  setData: (data: IResultData) => void;
+  setData?: (data: IResultData) => void;
 }
 
-function CardList({ searchTerm, activePage, setData }: CardListProps) {
+function CardList({ searchTerm, activePage }: CardListProps) {
   const { data, isLoading } = useGetPlanetsQuery({
     searchTerm: searchTerm,
     page: activePage,
   });
 
-  if (data) setData(data);
+  // setData(data);
 
   return (
     <div className={styles.list}>

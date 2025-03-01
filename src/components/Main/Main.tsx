@@ -1,41 +1,54 @@
 import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import { IResultData } from '../../interfaces/interfaces';
+import { useRouter } from 'next/router';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useThemeContext from '../../hooks/useThemeContext';
 import Pagination from '../Pagination/Pagination';
 import SearchSection from '../SearchSection/SearchSection';
 import Flyout from '../Flyout/Flyout';
 import CardList from '../CardList/CardList';
-import './Main.css';
+import styles from './Main.module.css';
 
 function Main() {
+  const router = useRouter();
+
   const { theme } = useThemeContext();
+
   const [searchTerm, setSearchTerm] = useLocalStorage('searchTerm');
 
   const [queryTerm, setQueryTerm] = useState(searchTerm);
 
-  const [activePage, setActivePage] = useState(1);
+  const [activePage, setActivePage] = useState(Number(router.query.page) || 1);
 
-  const [resultsData, setResultsData] = useState<IResultData>({
-    count: 0,
-    results: [],
-  });
+  useEffect(() => {
+    if (router.query.page) {
+      setActivePage(Number(router.query.page));
+    }
+  }, [router.query.page]);
 
   useEffect(() => {
     handleSearch(searchTerm);
   }, [searchTerm]);
 
+  const navigateToPage = (page: number) => {
+    router.push({
+      pathname: '/',
+      query: { ...router.query, page },
+    });
+    setActivePage(page);
+  };
+
   const handleSearch = (term: string) => {
     setSearchTerm(term);
     setQueryTerm(searchTerm);
+
     setActivePage(1);
   };
 
   return (
     <>
       <div
-        className={`main_page_wrapper ${theme === 'dark' ? 'dark' : 'light'}`}
+        // className={`main_page_wrapper ${theme === 'dark' ? 'dark' : 'light'}`}
+        className={`${styles.main_page_wrapper} ${theme === 'dark' ? 'dark' : 'light'}`}
       >
         <div className="main_page">
           <h1>Search for a planet</h1>
@@ -45,18 +58,10 @@ function Main() {
             Wars Universe, at the time of 0 ABY
           </p>
           <SearchSection onSearch={handleSearch} />
-          <CardList
-            searchTerm={queryTerm}
-            activePage={activePage}
-            setData={setResultsData}
-          />
-          <Pagination
-            itemsCount={resultsData?.count || 0}
-            onClick={setActivePage}
-          />
+          <CardList searchTerm={queryTerm} activePage={activePage} />
+          <Pagination searchTerm={queryTerm} onPageClick={navigateToPage} />
           <Flyout />
         </div>
-        <Outlet />
       </div>
     </>
   );

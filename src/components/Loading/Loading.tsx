@@ -1,9 +1,9 @@
-import './Loading.css';
+import styles from './Loading.module.css';
 
 const Loading = () => {
   return (
-    <div className="loading_background">
-      <div className="loading" data-testid="loading"></div>
+    <div className={styles.loading_background}>
+      <div className={styles.loading} data-testid="loading"></div>
     </div>
   );
 };

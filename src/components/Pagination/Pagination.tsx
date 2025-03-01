@@ -1,19 +1,23 @@
-import { useSearchParams } from 'react-router-dom';
+import { useGetPlanetsQuery } from '../../store/api/api';
 import styles from './Pagination.module.css';
 
 interface PaginationProps {
-  itemsCount: number;
-  onClick: (pageNumber: number) => void;
+  searchTerm: string;
+  onPageClick: (pageNumber: number) => void;
 }
 const ITEMS_FOR_PAGE = 10;
 
-function Pagination({ itemsCount, onClick }: PaginationProps) {
-  const [, setSearchParams] = useSearchParams();
+function Pagination({ searchTerm, onPageClick }: PaginationProps) {
+  const { data } = useGetPlanetsQuery({
+    searchTerm: searchTerm,
+  });
+
+  const itemsCount = data?.count ?? 0;
+
   const pagesCount = Math.ceil(itemsCount / ITEMS_FOR_PAGE);
 
   const handlePageClick = (pageNumber: number) => {
-    setSearchParams({ page: String(pageNumber) });
-    onClick(pageNumber);
+    onPageClick(pageNumber);
   };
   return (
     <div>

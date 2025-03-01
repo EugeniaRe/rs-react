@@ -4,8 +4,10 @@ const useLocalStorage = (
   key: string,
   value?: string
 ): [string, React.Dispatch<React.SetStateAction<string>>] => {
+  const valueFromStorage =
+    typeof window !== 'undefined' ? localStorage.getItem(key) : '';
   const [storedValue, setStoredValue] = useState(
-    localStorage.getItem(key) || value || ''
+    valueFromStorage || value || ''
   );
 
   useEffect(() => {

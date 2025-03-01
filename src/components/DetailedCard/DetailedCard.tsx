@@ -1,14 +1,15 @@
-import { Link, useParams } from 'react-router-dom';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { skipToken } from '@reduxjs/toolkit/query';
 import Loading from '../Loading/Loading';
 import { useGetPlanetQuery } from '../../store/api/api';
-import { skipToken } from '@reduxjs/toolkit/query';
+
 import styles from './DetailedCard.module.css';
 
-function DetailedCard() {
-  const { id } = useParams();
-
+function DetailedCard({ planetId }: { planetId: string }) {
+  const searchParams = useSearchParams();
   const { data: planet, isLoading: isLoadingPlanet } = useGetPlanetQuery(
-    id ?? skipToken
+    planetId ?? skipToken
   );
 
   return (
@@ -20,7 +21,12 @@ function DetailedCard() {
         <div>Diameter: {planet?.diameter}</div>
       </div>
 
-      <Link to="/">
+      <Link
+        href={{
+          pathname: '/',
+          query: { page: `${searchParams.get('page')}` },
+        }}
+      >
         <button>Close</button>
       </Link>
       {isLoadingPlanet && <Loading />}
