@@ -1,13 +1,7 @@
-import Link from 'next/link';
-import '../styles/404.module.css';
+import NotFound from 'src/components/NotFound/NotFound';
 
-function NotFound() {
-  return (
-    <div className="page">
-      <h1>404: Page Not Found</h1>
-      <Link href="/">Back to Home</Link>
-    </div>
-  );
+function Page404() {
+  return <NotFound />;
 }
 
-export default NotFound;
+export default Page404;

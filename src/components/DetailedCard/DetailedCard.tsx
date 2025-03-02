@@ -3,7 +3,6 @@ import { useSearchParams } from 'next/navigation';
 import { skipToken } from '@reduxjs/toolkit/query';
 import Loading from '../Loading/Loading';
 import { useGetPlanetQuery } from '../../store/api/api';
-
 import styles from './DetailedCard.module.css';
 
 function DetailedCard({ planetId }: { planetId: string }) {

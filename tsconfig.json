@@ -11,11 +11,19 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/": ["components/"],
-      "@pages/": ["pages/"]
+      "@components/": [
+        "components/"
+      ],
+      "@pages/": [
+        "pages/"
+      ]
     },
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -34,6 +42,13 @@
     ],
     "strictNullChecks": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

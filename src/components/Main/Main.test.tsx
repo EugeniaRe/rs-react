@@ -10,12 +10,23 @@ import useThemeContext from '../../hooks/useThemeContext';
 import { reducer } from '../../store/selectedItems/selectedItems.slice';
 import { IResultData } from '../../interfaces/interfaces';
 
+vi.mock('next/router', () => ({
+  useRouter: vi.fn(() => ({
+    push: vi.fn(),
+    query: {},
+  })),
+}));
+
 vi.mock('../../hooks/useLocalStorage', () => ({
   default: vi.fn(),
 }));
 
 vi.mock('../../hooks/useThemeContext', () => ({
   default: vi.fn(),
+}));
+
+vi.mock('../Pagination/Pagination', () => ({
+  default: () => <div data-testid="pagination-mock">Pagination Mock</div>,
 }));
 
 const createMockItemsStore = () => {

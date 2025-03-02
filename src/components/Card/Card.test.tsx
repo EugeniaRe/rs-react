@@ -7,6 +7,31 @@ import { configureStore } from '@reduxjs/toolkit';
 import Card from './Card';
 import { reducer } from '../../store/selectedItems/selectedItems.slice';
 
+interface LinkProps {
+  children: React.ReactNode;
+  href: {
+    pathname: string;
+    query: string;
+  };
+}
+vi.mock('next/link', () => {
+  return {
+    default: ({ children, href }: LinkProps) => (
+      <a
+        href={href.pathname + '?' + new URLSearchParams(href.query).toString()}
+      >
+        {children}
+      </a>
+    ),
+  };
+});
+
+vi.mock('next/navigation', () => ({
+  useSearchParams: () => ({
+    get: () => '1',
+  }),
+}));
+
 const resultExample = {
   name: 'Tatooine',
   url: 'https://swapi.dev/api/planets/1/',
