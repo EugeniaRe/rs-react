@@ -4,12 +4,12 @@ import { useDispatch } from 'react-redux';
 import { actions } from '../../store/selectedItems/selectedItems.slice';
 import useSelectedItems from '../../hooks/useSelectedItems';
 import styles from './Card.module.css';
-import { useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 
 function Card({ result }: ICard) {
   const { selectedItems } = useSelectedItems();
 
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
   const dispatch = useDispatch();
 
@@ -34,7 +34,7 @@ function Card({ result }: ICard) {
       <Link
         href={{
           pathname: `/planets/${planetId}`,
-          query: { page: `${searchParams.get('page')}` },
+          // query: { page: `${searchParams.get('page')}` },
         }}
         className={styles.name}
       >

@@ -3,14 +3,12 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import styles from './Home.module.css';
 
-function Home({ children }: { children: React.ReactNode }) {
+function Home() {
   return (
     <>
       <Header />
       <div className={styles.main_wrapper}>
         <Main />
-
-        {children}
       </div>
       <Footer />
     </>

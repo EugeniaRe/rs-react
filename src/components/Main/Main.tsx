@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useThemeContext from '../../hooks/useThemeContext';
 import Pagination from '../Pagination/Pagination';
@@ -9,37 +9,39 @@ import CardList from '../CardList/CardList';
 import styles from './Main.module.css';
 
 function Main() {
-  const router = useRouter();
+  // const router = useRouter();
 
   const { theme } = useThemeContext();
 
   const [searchTerm, setSearchTerm] = useLocalStorage('searchTerm');
 
-  const [queryTerm, setQueryTerm] = useState(searchTerm);
+  // const [queryTerm, setQueryTerm] = useState(searchTerm);
 
-  const [activePage, setActivePage] = useState(Number(router.query.page) || 1);
+  // const [activePage, setActivePage] = useState(Number(router.query.page) || 1);
 
-  useEffect(() => {
-    if (router.query.page) {
-      setActivePage(Number(router.query.page));
-    }
-  }, [router.query.page]);
+  const [activePage, setActivePage] = useState(1);
+
+  // useEffect(() => {
+  //   if (router.query.page) {
+  //     setActivePage(Number(router.query.page));
+  //   }
+  // }, [router.query.page]);
 
   useEffect(() => {
     handleSearch(searchTerm);
   }, [searchTerm]);
 
   const navigateToPage = (page: number) => {
-    router.push({
-      pathname: '/',
-      query: { ...router.query, page },
-    });
+    // router.push({
+    //   pathname: '/',
+    //   query: { ...router.query, page },
+    // });
     setActivePage(page);
   };
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
-    setQueryTerm(searchTerm);
+    // setQueryTerm(searchTerm);
 
     setActivePage(1);
   };
@@ -57,8 +59,8 @@ function Main() {
             Wars Universe, at the time of 0 ABY
           </p>
           <SearchSection onSearch={handleSearch} />
-          <CardList searchTerm={queryTerm} activePage={activePage} />
-          <Pagination searchTerm={queryTerm} onPageClick={navigateToPage} />
+          <CardList searchTerm={searchTerm} activePage={activePage} />
+          <Pagination searchTerm={searchTerm} onPageClick={navigateToPage} />
           <Flyout />
         </div>
       </div>

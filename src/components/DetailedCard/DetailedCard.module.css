@@ -4,16 +4,19 @@
 
 .container {
   width: 40%;
-  padding: 10% 1%;
+  padding: 0 1%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 20px;
   background-color: #505050;
   color: #dbdbdb;
 }
 
-.container img {
+.img_wrapper {
+  position: relative;
+  width: 100%;
   max-width: 250px;
-  max-height: 250px;
+  height: 250px;
 }

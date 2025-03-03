@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { skipToken } from '@reduxjs/toolkit/query';
 import Loading from '../Loading/Loading';
@@ -7,13 +10,16 @@ import styles from './DetailedCard.module.css';
 
 function DetailedCard({ planetId }: { planetId: string }) {
   const searchParams = useSearchParams();
+
   const { data: planet, isLoading: isLoadingPlanet } = useGetPlanetQuery(
     planetId ?? skipToken
   );
 
   return (
     <div className={styles.container}>
-      <img src="/planet_favicon.svg" alt="planet image" />
+      <div className={styles.img_wrapper}>
+        <Image src="/planet-img.svg" alt="planet image" fill />
+      </div>
       <div>
         <div>Planet: {planet?.name}</div>
         <div>Climate: {planet?.climate}</div>
