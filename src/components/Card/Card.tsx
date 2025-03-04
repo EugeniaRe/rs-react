@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { ICard, IResultItem } from '../../interfaces/interfaces';
+import { useSearchParams } from 'next/navigation';
 import { useDispatch } from 'react-redux';
+import { ICard, IResultItem } from '../../interfaces/interfaces';
 import { actions } from '../../store/selectedItems/selectedItems.slice';
 import useSelectedItems from '../../hooks/useSelectedItems';
 import styles from './Card.module.css';
@@ -23,6 +24,10 @@ function Card({ result }: ICard) {
 
   const planetId = result.url.split('/')[5];
 
+  // const router = useRouter();
+  // const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   return (
     <div className={styles.card}>
       <input
@@ -34,7 +39,7 @@ function Card({ result }: ICard) {
       <Link
         href={{
           pathname: `/planets/${planetId}`,
-          // query: { page: `${searchParams.get('page')}` },
+          query: { page: `${searchParams.get('page') ?? 1}` },
         }}
         className={styles.name}
       >

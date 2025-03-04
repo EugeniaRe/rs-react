@@ -1,3 +1,4 @@
+import { ITEMS_FOR_PAGE } from '../../constants';
 import { useGetPlanetsQuery } from '../../store/api/api';
 import styles from './Pagination.module.css';
 
@@ -5,7 +6,6 @@ interface PaginationProps {
   searchTerm: string;
   onPageClick: (pageNumber: number) => void;
 }
-const ITEMS_FOR_PAGE = 10;
 
 function Pagination({ searchTerm, onPageClick }: PaginationProps) {
   const { data } = useGetPlanetsQuery({

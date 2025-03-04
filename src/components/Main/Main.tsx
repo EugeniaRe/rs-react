@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-// import { useRouter } from 'next/router';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useGetPlanetsQuery } from '../../store/api/api';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useThemeContext from '../../hooks/useThemeContext';
 import Pagination from '../Pagination/Pagination';
@@ -7,10 +8,11 @@ import SearchSection from '../SearchSection/SearchSection';
 import Flyout from '../Flyout/Flyout';
 import CardList from '../CardList/CardList';
 import styles from './Main.module.css';
+import { ITEMS_FOR_PAGE } from '../../constants';
+import createQueryString from '../../utils/createQueryString';
+// import usePage from '../../hooks/usePage';
 
 function Main() {
-  // const router = useRouter();
-
   const { theme } = useThemeContext();
 
   const [searchTerm, setSearchTerm] = useLocalStorage('searchTerm');
@@ -19,7 +21,24 @@ function Main() {
 
   // const [activePage, setActivePage] = useState(Number(router.query.page) || 1);
 
-  const [activePage, setActivePage] = useState(1);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const pageParam = Number(searchParams.get('page') ?? '1');
+
+  const { data } = useGetPlanetsQuery({ searchTerm: searchTerm, page: 1 });
+
+  const pagesCount = data ? Math.ceil(data.count / ITEMS_FOR_PAGE) : 0;
+
+  const [activePage, setActivePage] = useState(0);
+
+  useEffect(() => {
+    setActivePage(pageParam > pagesCount ? 1 : pageParam);
+  }, [pagesCount]);
+
+  // const [activePage, setActivePage] = usePage(searchTerm);
+  // console.log('activePage', activePage);
 
   // useEffect(() => {
   //   if (router.query.page) {
@@ -32,10 +51,13 @@ function Main() {
   }, [searchTerm]);
 
   const navigateToPage = (page: number) => {
-    // router.push({
-    //   pathname: '/',
-    //   query: { ...router.query, page },
-    // });
+    // const params = new URLSearchParams(searchParams.toString());
+    // params.set('page', page.toString());
+
+    // router.push(`${pathname}?${params.toString()}`);
+    router.push(
+      `${pathname}?${createQueryString(searchParams, 'page', page.toString())}`
+    );
     setActivePage(page);
   };
 
@@ -43,7 +65,7 @@ function Main() {
     setSearchTerm(term);
     // setQueryTerm(searchTerm);
 
-    setActivePage(1);
+    // setActivePage(1);
   };
 
   return (

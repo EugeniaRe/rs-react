@@ -28,12 +28,6 @@
       "static/chunks/main-app.js",
       "static/css/app/(home)/planets/[planetId]/page.css",
       "static/chunks/app/(home)/planets/[planetId]/page.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/_not-found/page.css",
-      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

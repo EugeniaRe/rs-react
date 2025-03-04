@@ -29,7 +29,7 @@ function DetailedCard({ planetId }: { planetId: string }) {
       <Link
         href={{
           pathname: '/',
-          query: { page: `${searchParams.get('page')}` },
+          query: { page: `${searchParams.get('page') ?? 1}` },
         }}
       >
         <button>Close</button>
