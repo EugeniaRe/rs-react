@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ITEMS_FOR_PAGE } from '../../constants';
 import { useGetPlanetsQuery } from '../../store/api/api';
@@ -20,8 +21,20 @@ function Pagination({ searchTerm }: PaginationProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const pageParam = searchParams.get('page')
+    ? !isNaN(Number(searchParams.get('page')))
+      ? Number(searchParams.get('page'))
+      : 1
+    : 1;
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setCurrentPage(pageParam > pagesCount ? 1 : pageParam);
+  }, [pagesCount, pageParam]);
+
   const handlePageClick = (pageNumber: number) => {
-    // onPageClick(pageNumber);
     router.push(
       `${pathname}?${createQueryString(searchParams, 'page', pageNumber.toString())}`
     );
@@ -30,7 +43,7 @@ function Pagination({ searchTerm }: PaginationProps) {
     <div>
       {Array.from({ length: pagesCount }).map((_, index) => (
         <button
-          className={styles.btn}
+          className={`${styles.btn} ${currentPage === index + 1 && styles.active}`}
           onClick={() => handlePageClick(index + 1)}
           key={index}
         >

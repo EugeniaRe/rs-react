@@ -57,6 +57,15 @@
   margin: 0 5px;
   padding: 0.2em 0.5em;
 }
+
+.Pagination_btn__OtcLd.Pagination_active__xC1TQ {
+  border: 2px solid #646cff;
+}
+
+.Pagination_dark___AtUM .Pagination_btn__OtcLd.Pagination_active__xC1TQ {
+  border: 2px solid #1e10e4;
+}
+
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/SearchSection/SearchSection.module.css ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************/
@@ -191,31 +200,11 @@
   align-items: center;
   gap: 20px;
 }
-/* 
-.dark {
-  background-color: #242424;
-  color: #dbdbdb;
-}
 
-.dark a {
-  font-weight: 500;
-  color: #bbbefd;
-  text-decoration: inherit;
-}
-
-.dark button {
-  background-color: #3339a8;
-  color: #dbdbdb;
-}
-
-.dark header {
-  padding-bottom: 50px;
-} */
-
-/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/components/Home/Home.module.css ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************/
-.Home_main_wrapper__qoFr_ {
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/(home)/Home.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+.Home_main_wrapper__9rC_s {
   display: flex;
   justify-content: space-between;
 }

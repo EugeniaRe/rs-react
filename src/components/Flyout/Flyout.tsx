@@ -1,7 +1,7 @@
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useSelectedItems from '../../hooks/useSelectedItems';
 import { actions } from '../../store/selectedItems/selectedItems.slice';
-import { useEffect, useState } from 'react';
 import styles from './Flyout.module.css';
 
 function Flyout() {

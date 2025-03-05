@@ -1,10 +1,10 @@
+import { useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { IResultItem } from '../../interfaces/interfaces';
 import { useGetPlanetsQuery } from '../../store/api/api';
 import Loading from '../Loading/Loading';
 import Card from '../Card/Card';
 import styles from './CardList.module.css';
-import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
 import { ITEMS_FOR_PAGE } from '../../constants';
 
 interface CardListProps {
@@ -13,8 +13,6 @@ interface CardListProps {
 
 function CardList({ searchTerm }: CardListProps) {
   const searchParams = useSearchParams();
-
-  // const pageParam = Number(searchParams.get('page') ?? '1');
 
   const pageParam = searchParams.get('page')
     ? !isNaN(Number(searchParams.get('page')))
@@ -29,20 +27,7 @@ function CardList({ searchTerm }: CardListProps) {
 
   const pagesCount = Math.ceil(resultsCount / ITEMS_FOR_PAGE);
 
-  // const [activePage, setActivePage] = useState(0);
-
-  useEffect(() => {
-    // setActivePage(pageParam > pagesCount ? 1 : pageParam);
-  }, [pagesCount]);
-
-  // setData(data);
-
-  // if (pageParam > pagesCount) {
-  //   pageParam = 1;
-  //   router.push(
-  //     `${pathname}?${createQueryString(searchParams, 'page', pageParam.toString())}`
-  //   );
-  // }
+  useEffect(() => {}, [pagesCount]);
 
   const { data, isLoading } = useGetPlanetsQuery({
     searchTerm: searchTerm,

@@ -5,12 +5,9 @@ import { ICard, IResultItem } from '../../interfaces/interfaces';
 import { actions } from '../../store/selectedItems/selectedItems.slice';
 import useSelectedItems from '../../hooks/useSelectedItems';
 import styles from './Card.module.css';
-// import { useSearchParams } from 'next/navigation';
 
 function Card({ result }: ICard) {
   const { selectedItems } = useSelectedItems();
-
-  // const searchParams = useSearchParams();
 
   const dispatch = useDispatch();
 
@@ -24,8 +21,6 @@ function Card({ result }: ICard) {
 
   const planetId = result.url.split('/')[5];
 
-  // const router = useRouter();
-  // const pathname = usePathname();
   const searchParams = useSearchParams();
 
   return (
