@@ -30,8 +30,19 @@ describe('Header', () => {
   it('toggles theme when clicking the switch theme button', () => {
     render(<Header />);
     const switchButton = screen.getByRole('button', { name: /Switch to/i });
+
     fireEvent.click(switchButton);
 
     expect(mockToggleTheme).toHaveBeenCalled();
+  });
+
+  it('renders Switch to Light Theme button if theme is dark', () => {
+    (useThemeContext as vi.Mock).mockReturnValue({
+      theme: 'dark',
+      toggleTheme: mockToggleTheme,
+    });
+    render(<Header />);
+
+    expect(screen.getByText('Switch to Light Theme')).toBeInTheDocument();
   });
 });

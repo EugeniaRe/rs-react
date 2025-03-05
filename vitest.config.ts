@@ -15,7 +15,12 @@ export default defineConfig({
     exclude: [...configDefaults.exclude, 'src/App.tsx', 'src/main.tsx'],
     coverage: {
       include: ['**/*.tsx'],
-      exclude: ['src/App.tsx', 'pages', ...coverageConfigDefaults.exclude],
+      exclude: [
+        'src/App.tsx',
+        'pages',
+        // 'src/app/**',
+        ...coverageConfigDefaults.exclude,
+      ],
     },
   },
 });

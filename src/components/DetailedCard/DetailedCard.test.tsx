@@ -1,69 +1,91 @@
 import '@testing-library/jest-dom';
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
+import { useSearchParams } from 'next/navigation';
 import DetailedCard from './DetailedCard';
-import { api } from '../../store/api/api';
-
-interface LinkProps {
-  children: React.ReactNode;
-  href: {
-    pathname: string;
-    query: string;
-  };
-}
-
-vi.mock('next/link', () => ({
-  default: ({ children, href }: LinkProps) => (
-    <a href={typeof href === 'object' ? href.pathname : href}>{children}</a>
-  ),
-}));
+import { useGetPlanetQuery } from '../../store/api/api';
 
 vi.mock('next/navigation', () => ({
-  useSearchParams: () => ({
-    get: vi.fn().mockImplementation((param: string) => {
-      if (param === 'page') return '1';
-      return null;
-    }),
-  }),
+  useSearchParams: vi.fn(),
 }));
 
-const createMockStore = () => {
-  return configureStore({
-    reducer: {
-      [api.reducerPath]: api.reducer,
-    },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(api.middleware),
-  });
-};
+vi.mock('../../store/api/api', () => ({
+  useGetPlanetQuery: vi.fn(),
+}));
+
+vi.mock('next/link', () => ({
+  default: vi.fn(({ children, href }) => (
+    <a href={JSON.stringify(href)}>{children}</a>
+  )),
+}));
 
 describe('DetailedCard', () => {
-  it('renders close button', () => {
-    const store = createMockStore();
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <DetailedCard planetId="1" />
-        </MemoryRouter>
-      </Provider>
-    );
-    expect(screen.getByRole('button', { name: /close/i })).toBeInTheDocument();
+  const mockPlanetData = {
+    name: 'Tatooine',
+    climate: 'Arid',
+    diameter: '10465',
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    // Set default mock for useSearchParams
+    vi.mocked(useSearchParams).mockReturnValue(new URLSearchParams('page=1'));
   });
 
-  it('renders titles for name, climate and diameter', () => {
-    const store = createMockStore();
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <DetailedCard planetId="1" />{' '}
-        </MemoryRouter>
-      </Provider>
+  it('renders loading when data is loading', async () => {
+    useGetPlanetQuery.mockReturnValue({
+      data: undefined,
+      isLoading: true,
+    });
+
+    render(<DetailedCard planetId="1" />);
+
+    expect(screen.getByTestId('loading')).toBeInTheDocument();
+  });
+
+  it('renders planet data when query is successful', () => {
+    useGetPlanetQuery.mockReturnValue({
+      data: mockPlanetData,
+      isLoading: false,
+    });
+
+    render(<DetailedCard planetId="1" />);
+
+    expect(screen.getByText('Planet: Tatooine')).toBeInTheDocument();
+    expect(screen.getByText('Climate: Arid')).toBeInTheDocument();
+    expect(screen.getByText('Diameter: 10465')).toBeInTheDocument();
+  });
+
+  it('renders close button with correct link when page param exists', async () => {
+    useGetPlanetQuery.mockReturnValue({
+      data: mockPlanetData,
+      isLoading: false,
+    });
+
+    render(<DetailedCard planetId="1" />);
+
+    const linkElement = screen.getByRole('link', { name: 'Close' });
+    expect(linkElement).toBeInTheDocument();
+    expect(linkElement).toHaveAttribute(
+      'href',
+      '{"pathname":"/","query":{"page":"1"}}'
     );
-    expect(screen.getByText('Planet:')).toBeInTheDocument();
-    expect(screen.getByText('Climate:')).toBeInTheDocument();
-    expect(screen.getByText('Diameter:')).toBeInTheDocument();
+  });
+
+  it('renders close button with correct link when page param does not exist', () => {
+    useGetPlanetQuery.mockReturnValue({
+      data: mockPlanetData,
+      isLoading: false,
+    });
+    vi.mocked(useSearchParams).mockReturnValue(new URLSearchParams(''));
+
+    render(<DetailedCard planetId="1" />);
+
+    const linkElement = screen.getByRole('link', { name: 'Close' });
+    expect(linkElement).toBeInTheDocument();
+    expect(linkElement).toHaveAttribute(
+      'href',
+      '{"pathname":"/","query":{"page":"1"}}'
+    );
   });
 });
