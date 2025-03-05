@@ -7,7 +7,7 @@ function Header() {
 
   return (
     <div className={styles.header}>
-      <Link href={'/'} className={styles.logo}>
+      <Link href={'/?page=1'} className={styles.logo}>
         SW Planets
       </Link>
       <button className={styles.theme_btn} onClick={toggleTheme}>

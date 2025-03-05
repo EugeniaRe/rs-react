@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { useGetPlanetsQuery } from '../../store/api/api';
+import { useEffect } from 'react';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useThemeContext from '../../hooks/useThemeContext';
 import Pagination from '../Pagination/Pagination';
@@ -8,10 +6,9 @@ import SearchSection from '../SearchSection/SearchSection';
 import Flyout from '../Flyout/Flyout';
 import CardList from '../CardList/CardList';
 import styles from './Main.module.css';
-import { ITEMS_FOR_PAGE } from '../../constants';
-import createQueryString from '../../utils/createQueryString';
 // import usePage from '../../hooks/usePage';
 
+//TODO: refactor code
 function Main() {
   const { theme } = useThemeContext();
 
@@ -19,23 +16,29 @@ function Main() {
 
   // const [queryTerm, setQueryTerm] = useState(searchTerm);
 
-  // const [activePage, setActivePage] = useState(Number(router.query.page) || 1);
+  // const router = useRouter();
+  // const pathname = usePathname();
+  // const searchParams = useSearchParams();
 
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  // const [activePage, setActivePage] = useState(1);
+  // // const pageParam = Number(searchParams.get('page') ?? '1');
 
-  const pageParam = Number(searchParams.get('page') ?? '1');
+  // const pageParam = searchParams.get('page')
+  //   ? !isNaN(Number(searchParams.get('page')))
+  //     ? Number(searchParams.get('page'))
+  //     : 1
+  //   : 1;
+  // console.log('pageParam', searchParams.get('page'));
 
-  const { data } = useGetPlanetsQuery({ searchTerm: searchTerm, page: 1 });
+  // const { data } = useGetPlanetsQuery({ searchTerm: searchTerm, page: 1 });
 
-  const pagesCount = data ? Math.ceil(data.count / ITEMS_FOR_PAGE) : 0;
+  // const pagesCount = data ? Math.ceil(data.count / ITEMS_FOR_PAGE) : 0;
 
-  const [activePage, setActivePage] = useState(0);
+  // const [activePage, setActivePage] = useState(0);
 
-  useEffect(() => {
-    setActivePage(pageParam > pagesCount ? 1 : pageParam);
-  }, [pagesCount]);
+  // useEffect(() => {
+  //   setActivePage(pageParam > pagesCount ? 1 : pageParam);
+  // }, [pagesCount]);
 
   // const [activePage, setActivePage] = usePage(searchTerm);
   // console.log('activePage', activePage);
@@ -50,16 +53,16 @@ function Main() {
     handleSearch(searchTerm);
   }, [searchTerm]);
 
-  const navigateToPage = (page: number) => {
-    // const params = new URLSearchParams(searchParams.toString());
-    // params.set('page', page.toString());
+  // const navigateToPage = (page: number) => {
+  //   // const params = new URLSearchParams(searchParams.toString());
+  //   // params.set('page', page.toString());
 
-    // router.push(`${pathname}?${params.toString()}`);
-    router.push(
-      `${pathname}?${createQueryString(searchParams, 'page', page.toString())}`
-    );
-    setActivePage(page);
-  };
+  //   // router.push(`${pathname}?${params.toString()}`);
+  //   router.push(
+  //     `${pathname}?${createQueryString(searchParams, 'page', page.toString())}`
+  //   );
+  //   setActivePage(page);
+  // };
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
@@ -81,8 +84,8 @@ function Main() {
             Wars Universe, at the time of 0 ABY
           </p>
           <SearchSection onSearch={handleSearch} />
-          <CardList searchTerm={searchTerm} activePage={activePage} />
-          <Pagination searchTerm={searchTerm} onPageClick={navigateToPage} />
+          <CardList searchTerm={searchTerm} />
+          <Pagination searchTerm={searchTerm} />
           <Flyout />
         </div>
       </div>

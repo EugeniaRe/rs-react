@@ -1,4 +1,4 @@
 {
-  "/(home)/planets/[planetId]/page": "app/(home)/planets/[planetId]/page.js",
-  "/(home)/page": "app/(home)/page.js"
+  "/(home)/page": "app/(home)/page.js",
+  "/(home)/planets/[planetId]/page": "app/(home)/planets/[planetId]/page.js"
 }

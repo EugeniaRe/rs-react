@@ -1,13 +1,14 @@
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ITEMS_FOR_PAGE } from '../../constants';
 import { useGetPlanetsQuery } from '../../store/api/api';
+import createQueryString from '../../utils/createQueryString';
 import styles from './Pagination.module.css';
 
 interface PaginationProps {
   searchTerm: string;
-  onPageClick: (pageNumber: number) => void;
 }
 
-function Pagination({ searchTerm, onPageClick }: PaginationProps) {
+function Pagination({ searchTerm }: PaginationProps) {
   const { data } = useGetPlanetsQuery({
     searchTerm: searchTerm,
   });
@@ -16,8 +17,14 @@ function Pagination({ searchTerm, onPageClick }: PaginationProps) {
 
   const pagesCount = Math.ceil(itemsCount / ITEMS_FOR_PAGE);
 
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const handlePageClick = (pageNumber: number) => {
-    onPageClick(pageNumber);
+    // onPageClick(pageNumber);
+    router.push(
+      `${pathname}?${createQueryString(searchParams, 'page', pageNumber.toString())}`
+    );
   };
   return (
     <div>
