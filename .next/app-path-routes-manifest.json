@@ -1,0 +1,6 @@
+{
+  "/icon.ico/route": "/icon.ico",
+  "/_not-found/page": "/_not-found",
+  "/(home)/page": "/",
+  "/(home)/planets/[planetId]/page": "/planets/[planetId]"
+}

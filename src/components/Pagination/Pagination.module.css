@@ -1,0 +1,12 @@
+.btn {
+  margin: 0 5px;
+  padding: 0.2em 0.5em;
+}
+
+.btn.active {
+  border: 2px solid #646cff;
+}
+
+.dark .btn.active {
+  border: 2px solid #1e10e4;
+}

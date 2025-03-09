@@ -1,0 +1,55 @@
+{
+  "pages": {
+    "/not-found": [
+      "static/chunks/webpack-43159b394f6d0ed9.js",
+      "static/chunks/4bd1b696-1224ce00b7c3f713.js",
+      "static/chunks/587-07916a7e7a62d018.js",
+      "static/chunks/main-app-b4effd528bd7ced0.js",
+      "static/css/b27b3e94d118e476.css",
+      "static/chunks/app/not-found-537b2cf0c2a07e6c.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack-43159b394f6d0ed9.js",
+      "static/chunks/4bd1b696-1224ce00b7c3f713.js",
+      "static/chunks/587-07916a7e7a62d018.js",
+      "static/chunks/main-app-b4effd528bd7ced0.js",
+      "static/css/b27b3e94d118e476.css",
+      "static/chunks/app/_not-found/page-ed24b2818a468524.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-43159b394f6d0ed9.js",
+      "static/chunks/4bd1b696-1224ce00b7c3f713.js",
+      "static/chunks/587-07916a7e7a62d018.js",
+      "static/chunks/main-app-b4effd528bd7ced0.js",
+      "static/css/552716b8ae0309ad.css",
+      "static/chunks/295-5b8b7df563142d67.js",
+      "static/chunks/app/layout-f4cb64fc6bcbab74.js"
+    ],
+    "/(home)/layout": [
+      "static/chunks/webpack-43159b394f6d0ed9.js",
+      "static/chunks/4bd1b696-1224ce00b7c3f713.js",
+      "static/chunks/587-07916a7e7a62d018.js",
+      "static/chunks/main-app-b4effd528bd7ced0.js",
+      "static/css/12c9892346a5e17f.css",
+      "static/chunks/295-5b8b7df563142d67.js",
+      "static/chunks/app/(home)/layout-02d8cdaec4d25549.js"
+    ],
+    "/(home)/page": [
+      "static/chunks/webpack-43159b394f6d0ed9.js",
+      "static/chunks/4bd1b696-1224ce00b7c3f713.js",
+      "static/chunks/587-07916a7e7a62d018.js",
+      "static/chunks/main-app-b4effd528bd7ced0.js",
+      "static/chunks/app/(home)/page-4cf2fea156968830.js"
+    ],
+    "/(home)/planets/[planetId]/page": [
+      "static/chunks/webpack-43159b394f6d0ed9.js",
+      "static/chunks/4bd1b696-1224ce00b7c3f713.js",
+      "static/chunks/587-07916a7e7a62d018.js",
+      "static/chunks/main-app-b4effd528bd7ced0.js",
+      "static/css/12c9892346a5e17f.css",
+      "static/chunks/295-5b8b7df563142d67.js",
+      "static/chunks/738-cc7e9feef4c8dc99.js",
+      "static/chunks/app/(home)/planets/[planetId]/page-b9938c771bda03a9.js"
+    ]
+  }
+}
