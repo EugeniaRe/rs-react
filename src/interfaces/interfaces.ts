@@ -13,6 +13,8 @@ export interface IThemeContext {
 export interface IResultData {
   results: IResultItem[];
   count: number;
+  next: string | null;
+  previous: string | null;
 }
 
 export interface ICard {

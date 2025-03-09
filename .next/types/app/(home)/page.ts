@@ -1,4 +1,4 @@
-// File: F:\rs-school\react2025\class-components\src\app\(home)\page.tsx
+// File: C:\Users\evrep\Desktop\review\Next.js. Server Side Rendering\rs-react\src\app\(home)\page.tsx
 import * as entry from '../../../../src/app/(home)/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
