@@ -1,0 +1,11 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gender {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
