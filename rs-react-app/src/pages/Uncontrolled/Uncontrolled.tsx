@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { IFormData } from '../../types/interfaces';
 import { countries } from '../../constants/countries';
 import s from './Uncontrolled.module.css';
+import { formSchema } from '../../models/FormSchema';
+import { ValidationError } from 'yup';
 
 export const Uncontrolled = () => {
   const [formData, setFormData] = useState<IFormData>({
@@ -16,13 +18,49 @@ export const Uncontrolled = () => {
     picture: null,
     country: '',
   });
+
+  const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
   // const [, setErrors] = useState({});
   // const navigate = useNavigate();
 
   // const { validateForm } = useFormValidation();
 
+  // const validateForm = async (data: IFormData) => {
+  //   try {
+  //     formSchema.validateSync(data);
+  //     return {};
+  //   } catch (err) {
+  //     if (err instanceof ValidationError) {
+  //       return { [err.path ?? 'error']: err.message };
+  //     }
+  //     // return { [err.path]: err.message };
+  //   }
+  // };
+
+  const validateForm = (data: IFormData) =>
+    //: Promise<{ [key: string]: string }>
+    {
+      try {
+        formSchema.validateSync(data, { abortEarly: false });
+        return {};
+      } catch (error) {
+        if (error instanceof ValidationError) {
+          const errors: { [key: string]: string } = {};
+          console.log(error.inner);
+          error.inner.forEach((err) => {
+            if (err.path && !errors[err.path]) {
+              errors[err.path] = err.message;
+            }
+          });
+          return errors;
+        }
+        return {};
+      }
+    };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const errors = validateForm(formData);
+    setFormErrors(errors);
     // // const validationErrors = validateForm(formData);
     // if (Object.keys(validationErrors).length === 0) {
     //   // Dispatch to Redux
@@ -33,6 +71,19 @@ export const Uncontrolled = () => {
     // }
 
     console.log('Form submitted with data:', formData);
+    console.log('Errors:', errors);
+  };
+
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (formErrors[name]) {
+      const errors = validateForm({
+        ...formData,
+        [name]: value,
+      });
+      setFormErrors(errors);
+    }
   };
 
   return (
@@ -42,57 +93,72 @@ export const Uncontrolled = () => {
         <label htmlFor="name">Name</label>
         <input
           type="text"
-          name="name "
+          name="name"
           id="name"
           value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          onChange={(e) => {
+            handleChangeInput(e);
+          }}
           placeholder="Enter your name"
           required
         />
+        <div className={formErrors.name && s.error}>{formErrors.name}</div>
         <label htmlFor="age">Age</label>
         <input
           type="text"
-          name="age "
+          name="age"
           id="age"
           value={formData.age}
-          onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+          onChange={(e) => {
+            handleChangeInput(e);
+          }}
           placeholder="Enter your age"
           required
         />
+        <div className={formErrors.age && s.error}>{formErrors.age}</div>
         <label htmlFor="email">Email</label>
         <input
           type="email"
           name="email"
           id="email"
           value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          onChange={(e) => {
+            handleChangeInput(e);
+          }}
           placeholder="Enter your email"
           required
         />
+        <div className={formErrors.email && s.error}>{formErrors.email}</div>
         <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
           id="password"
           value={formData.password}
-          onChange={(e) =>
-            setFormData({ ...formData, password: e.target.value })
-          }
+          onChange={(e) => {
+            handleChangeInput(e);
+          }}
           placeholder="Enter your password"
           required
         />
+        <div className={formErrors.password && s.error}>
+          {formErrors.password}
+        </div>
         <label htmlFor="confirmPassword">Confirm Password</label>
         <input
           type="password"
           name="confirmPassword"
           id="confirmPassword"
           value={formData.confirmPassword}
-          onChange={(e) =>
-            setFormData({ ...formData, confirmPassword: e.target.value })
-          }
+          onChange={(e) => {
+            handleChangeInput(e);
+          }}
           placeholder="Confirm your password"
           required
         />
+        <div className={formErrors.confirmPassword && s.error}>
+          {formErrors.confirmPassword}
+        </div>
         <label htmlFor="gender">Gender</label>
         <div className={s.gender}>
           <input
@@ -124,32 +190,57 @@ export const Uncontrolled = () => {
             name="acceptTerms"
             id="acceptTerms"
             checked={formData.acceptTerms}
-            onChange={(event) =>
-              setFormData({ ...formData, acceptTerms: event.target.checked })
-            }
+            onChange={(e) => {
+              const { name, checked } = e.target;
+              setFormData({ ...formData, [name]: checked });
+              if (formErrors[name]) {
+                const errors = validateForm({
+                  ...formData,
+                  [name]: checked,
+                });
+                setFormErrors(errors);
+              }
+            }}
           />
           <label htmlFor="acceptTerms">
             Accept Terms and Conditions agreement
           </label>
+          <div className={formErrors.acceptTerms && s.error}>
+            {formErrors.acceptTerms}
+          </div>
         </div>
         <label htmlFor="picture">Picture</label>
         <input
           type="file"
           name="picture"
           id="picture"
-          onChange={(event) =>
-            setFormData({
-              ...formData,
-              picture: event.target.files ? event.target.files[0] : null,
-            })
+          onChange={
+            (e) => {
+              const { name, files } = e.target;
+              setFormData({ ...formData, [name]: files ? files[0] : null });
+              if (formErrors[name]) {
+                const errors = validateForm({
+                  ...formData,
+                  [name]: files ? files[0] : null,
+                });
+                setFormErrors(errors);
+              }
+            }
+            // setFormData({
+            //   ...formData,
+            //   picture: e.target.files ? e.target.files[0] : null,
+            // })
           }
         />
+        <div className={formErrors.picture && s.error}>
+          {formErrors.picture}
+        </div>
         <label htmlFor="country">Country</label>
         <select
           name="country"
           value={formData.country}
-          onChange={(event) =>
-            setFormData({ ...formData, country: event.target.value })
+          onChange={(e) =>
+            setFormData({ ...formData, country: e.target.value })
           }
         >
           {countries.map((country) => (
@@ -158,6 +249,9 @@ export const Uncontrolled = () => {
             </option>
           ))}
         </select>
+        <button type="submit" value="Submit">
+          Submit
+        </button>
       </form>
     </>
   );
