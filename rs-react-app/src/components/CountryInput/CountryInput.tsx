@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { RootState } from '../redux/store';
+import { RootState } from '../../redux/store';
 import s from './CountryInput.module.css';
 
 interface CountryInputProps {

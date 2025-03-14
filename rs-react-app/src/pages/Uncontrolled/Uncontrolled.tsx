@@ -6,7 +6,7 @@ import { IFormData } from '../../types/interfaces';
 import { formSchema } from '../../models/FormSchema';
 import { addFormData } from '../../redux/slices/FormDataSlice';
 import { RootState } from '../../redux/store';
-import { CountryInput } from '../../components/CountryInput';
+import { CountryInput } from '../../components/CountryInput/CountryInput';
 import s from './Uncontrolled.module.css';
 
 export const Uncontrolled = () => {
@@ -74,12 +74,12 @@ export const Uncontrolled = () => {
   };
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    if (formErrors[name]) {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+    if (formErrors[id]) {
       const errors = validateForm({
         ...formData,
-        [name]: value,
+        [id]: value,
       });
       setFormErrors(errors);
     }
@@ -92,7 +92,6 @@ export const Uncontrolled = () => {
         <label htmlFor="name">Name</label>
         <input
           type="text"
-          name="name"
           id="name"
           value={formData.name}
           onChange={(e) => {
@@ -105,7 +104,6 @@ export const Uncontrolled = () => {
         <label htmlFor="age">Age</label>
         <input
           type="text"
-          name="age"
           id="age"
           value={formData.age}
           onChange={(e) => {
@@ -118,7 +116,6 @@ export const Uncontrolled = () => {
         <label htmlFor="email">Email</label>
         <input
           type="email"
-          name="email"
           id="email"
           value={formData.email}
           onChange={(e) => {
@@ -131,7 +128,6 @@ export const Uncontrolled = () => {
         <label htmlFor="password">Password</label>
         <input
           type="password"
-          name="password"
           id="password"
           value={formData.password}
           onChange={(e) => {
@@ -146,7 +142,6 @@ export const Uncontrolled = () => {
         <label htmlFor="confirmPassword">Confirm Password</label>
         <input
           type="password"
-          name="confirmPassword"
           id="confirmPassword"
           value={formData.confirmPassword}
           onChange={(e) => {
@@ -160,48 +155,51 @@ export const Uncontrolled = () => {
         </div>
         <label htmlFor="gender">Gender</label>
         <div className={s.gender}>
-          <input
-            type="radio"
-            name="gender"
-            value="male"
-            id="male"
-            checked={formData.gender === 'male'}
-            onChange={(e) =>
-              setFormData({ ...formData, gender: e.target.value })
-            }
-          />
-          Male
-          <input
-            type="radio"
-            name="gender"
-            value="female"
-            id="female"
-            checked={formData.gender === 'female'}
-            onChange={(e) =>
-              setFormData({ ...formData, gender: e.target.value })
-            }
-          />
-          Female
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="male"
+              id="male"
+              checked={formData.gender === 'male'}
+              onChange={(e) =>
+                setFormData({ ...formData, gender: e.target.value })
+              }
+            />
+            Male
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="female"
+              id="female"
+              checked={formData.gender === 'female'}
+              onChange={(e) =>
+                setFormData({ ...formData, gender: e.target.value })
+              }
+            />
+            Female
+          </label>
         </div>
         <div>
-          <input
-            type="checkbox"
-            name="acceptTerms"
-            id="acceptTerms"
-            checked={formData.acceptTerms}
-            onChange={(e) => {
-              const { name, checked } = e.target;
-              setFormData({ ...formData, [name]: checked });
-              if (formErrors[name]) {
-                const errors = validateForm({
-                  ...formData,
-                  [name]: checked,
-                });
-                setFormErrors(errors);
-              }
-            }}
-          />
-          <label htmlFor="acceptTerms">
+          <label>
+            <input
+              type="checkbox"
+              id="acceptTerms"
+              checked={formData.acceptTerms}
+              onChange={(e) => {
+                const { id, checked } = e.target;
+                setFormData({ ...formData, [id]: checked });
+                if (formErrors[id]) {
+                  const errors = validateForm({
+                    ...formData,
+                    [id]: checked,
+                  });
+                  setFormErrors(errors);
+                }
+              }}
+            />
             Accept Terms and Conditions agreement
           </label>
           <div className={formErrors.acceptTerms && s.error}>
@@ -211,15 +209,14 @@ export const Uncontrolled = () => {
         <label htmlFor="picture">Picture</label>
         <input
           type="file"
-          name="picture"
           id="picture"
           onChange={(e) => {
-            const { name, files } = e.target;
-            setFormData({ ...formData, [name]: files ? files[0] : null });
-            if (formErrors[name]) {
+            const { id, files } = e.target;
+            setFormData({ ...formData, [id]: files ? files[0] : null });
+            if (formErrors[id]) {
               const errors = validateForm({
                 ...formData,
-                [name]: files ? files[0] : null,
+                [id]: files ? files[0] : null,
               });
               setFormErrors(errors);
             }

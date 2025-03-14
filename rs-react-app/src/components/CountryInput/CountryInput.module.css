@@ -5,7 +5,7 @@
 
 .country_input {
   display: block;
-  width: 100%;
+  width: calc(100% - 8px);
 }
 
 .country_list {

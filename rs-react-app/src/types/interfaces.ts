@@ -23,3 +23,15 @@ export interface IFormDataStore {
   pictureBase64: string;
   country: string;
 }
+
+export interface IRHFData {
+  acceptTerms?: boolean | undefined;
+  name: string;
+  age: number;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  gender: string;
+  picture: File | null;
+  country: string;
+}
