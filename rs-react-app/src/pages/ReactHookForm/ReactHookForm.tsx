@@ -50,19 +50,39 @@ export const ReactHookForm = () => {
       <h2>React Hook Form</h2>
       <form onSubmit={handleSubmit(onSubmit)} noValidate className={s.form}>
         <label htmlFor="name">Name</label>
-        <input type="text" id="name" {...register('name')} />
+        <input
+          type="text"
+          id="name"
+          placeholder="Enter your name"
+          {...register('name')}
+        />
         <ErrorMessage message={errors.name?.message} />
 
         <label htmlFor="age">Age</label>
-        <input type="text" id="age" {...register('age')} />
+        <input
+          type="text"
+          id="age"
+          placeholder="Enter your age"
+          {...register('age')}
+        />
         <ErrorMessage message={errors.age?.message} />
 
         <label htmlFor="email">Email</label>
-        <input type="email" id="email" {...register('email')} />
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          {...register('email')}
+        />
         <ErrorMessage message={errors.email?.message} />
 
         <label htmlFor="password">Password</label>
-        <input type="password" id="password" {...register('password')} />
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          {...register('password')}
+        />
 
         <ErrorMessage message={errors.password?.message} />
 
@@ -70,6 +90,7 @@ export const ReactHookForm = () => {
         <input
           type="password"
           id="confirmPassword"
+          placeholder="Confirm your password"
           {...register('confirmPassword')}
         />
         <ErrorMessage message={errors.confirmPassword?.message} />

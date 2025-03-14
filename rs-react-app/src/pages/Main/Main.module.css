@@ -13,3 +13,7 @@
 .picture {
   max-width: 200px;
 }
+
+.nav_links li {
+  list-style: none;
+}

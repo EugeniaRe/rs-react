@@ -98,7 +98,6 @@ export const Uncontrolled = () => {
             handleChangeInput(e);
           }}
           placeholder="Enter your name"
-          required
         />
         <div className={formErrors.name && s.error}>{formErrors.name}</div>
         <label htmlFor="age">Age</label>
@@ -110,7 +109,6 @@ export const Uncontrolled = () => {
             handleChangeInput(e);
           }}
           placeholder="Enter your age"
-          required
         />
         <div className={formErrors.age && s.error}>{formErrors.age}</div>
         <label htmlFor="email">Email</label>
@@ -122,7 +120,6 @@ export const Uncontrolled = () => {
             handleChangeInput(e);
           }}
           placeholder="Enter your email"
-          required
         />
         <div className={formErrors.email && s.error}>{formErrors.email}</div>
         <label htmlFor="password">Password</label>
@@ -134,7 +131,6 @@ export const Uncontrolled = () => {
             handleChangeInput(e);
           }}
           placeholder="Enter your password"
-          required
         />
         <div className={formErrors.password && s.error}>
           {formErrors.password}
@@ -148,7 +144,6 @@ export const Uncontrolled = () => {
             handleChangeInput(e);
           }}
           placeholder="Confirm your password"
-          required
         />
         <div className={formErrors.confirmPassword && s.error}>
           {formErrors.confirmPassword}

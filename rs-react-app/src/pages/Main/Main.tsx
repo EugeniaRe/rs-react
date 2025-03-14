@@ -25,10 +25,10 @@ export const Main = () => {
 
   return (
     <div>
-      <h1>main</h1>
+      <h1>Main Page</h1>
       <header>
         <nav>
-          <ul>
+          <ul className={s.nav_links}>
             <li>
               <Link to="/uncontrolled">Uncontrolled Form</Link>
             </li>

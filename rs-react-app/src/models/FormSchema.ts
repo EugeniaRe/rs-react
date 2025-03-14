@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import { MAX_FILE_SIZE } from '../constants/constants';
 
 const passwordStrengthRegex =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
 
 export const formSchema = yup.object().shape({
   name: yup
