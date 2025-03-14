@@ -1,13 +1,12 @@
 import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-import { IFormData } from '../../types/interfaces';
-import { countries } from '../../constants/countries';
-import { formSchema } from '../../models/FormSchema';
 import { ValidationError } from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFormData } from '../../redux/slices/FormDataSlice';
 import { useNavigate } from 'react-router-dom';
+import { IFormData } from '../../types/interfaces';
+import { formSchema } from '../../models/FormSchema';
+import { addFormData } from '../../redux/slices/FormDataSlice';
 import { RootState } from '../../redux/store';
+import { CountryInput } from '../../components/CountryInput';
 import s from './Uncontrolled.module.css';
 
 export const Uncontrolled = () => {
@@ -27,26 +26,10 @@ export const Uncontrolled = () => {
     gender: 'male',
     acceptTerms: false,
     picture: null,
-    country: formDataList[formDataList.length - 1]?.country || countries[0],
+    country: '',
   });
 
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
-  // const [, setErrors] = useState({});
-  // const navigate = useNavigate();
-
-  // const { validateForm } = useFormValidation();
-
-  // const validateForm = async (data: IFormData) => {
-  //   try {
-  //     formSchema.validateSync(data);
-  //     return {};
-  //   } catch (err) {
-  //     if (err instanceof ValidationError) {
-  //       return { [err.path ?? 'error']: err.message };
-  //     }
-  //     // return { [err.path]: err.message };
-  //   }
-  // };
 
   const validateForm = (data: IFormData) => {
     try {
@@ -88,8 +71,6 @@ export const Uncontrolled = () => {
         reader.readAsDataURL(file);
       }
     }
-    console.log('Form submitted with data:', formData);
-    console.log('Errors:', errors);
   };
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -232,41 +213,36 @@ export const Uncontrolled = () => {
           type="file"
           name="picture"
           id="picture"
-          onChange={
-            (e) => {
-              const { name, files } = e.target;
-              setFormData({ ...formData, [name]: files ? files[0] : null });
-              if (formErrors[name]) {
-                const errors = validateForm({
-                  ...formData,
-                  [name]: files ? files[0] : null,
-                });
-                setFormErrors(errors);
-              }
+          onChange={(e) => {
+            const { name, files } = e.target;
+            setFormData({ ...formData, [name]: files ? files[0] : null });
+            if (formErrors[name]) {
+              const errors = validateForm({
+                ...formData,
+                [name]: files ? files[0] : null,
+              });
+              setFormErrors(errors);
             }
-            // setFormData({
-            //   ...formData,
-            //   picture: e.target.files ? e.target.files[0] : null,
-            // })
-          }
+          }}
         />
         <div className={formErrors.picture && s.error}>
           {formErrors.picture}
         </div>
-        <label htmlFor="country">Country</label>
-        <select
-          name="country"
-          value={formData.country}
-          onChange={(e) =>
-            setFormData({ ...formData, country: e.target.value })
-          }
-        >
-          {countries.map((country) => (
-            <option key={country} value={country}>
-              {country}
-            </option>
-          ))}
-        </select>
+        <CountryInput
+          onChange={(country: string) => {
+            setFormData({ ...formData, country: country });
+            if (formErrors.country) {
+              const errors = validateForm({
+                ...formData,
+                country,
+              });
+              setFormErrors(errors);
+            }
+          }}
+        />
+        <div className={formErrors.country && s.error}>
+          {formErrors.country}
+        </div>
         <button type="submit" value="Submit">
           Submit
         </button>
