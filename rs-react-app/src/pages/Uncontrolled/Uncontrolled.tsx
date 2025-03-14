@@ -2,21 +2,32 @@ import { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import { IFormData } from '../../types/interfaces';
 import { countries } from '../../constants/countries';
-import s from './Uncontrolled.module.css';
 import { formSchema } from '../../models/FormSchema';
 import { ValidationError } from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFormData } from '../../redux/slices/FormDataSlice';
+import { useNavigate } from 'react-router-dom';
+import { RootState } from '../../redux/store';
+import s from './Uncontrolled.module.css';
 
 export const Uncontrolled = () => {
+  const navigate = useNavigate();
+
+  const formDataList = useSelector(
+    (state: RootState) => state.formData.formDataList
+  );
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState<IFormData>({
     name: '',
     age: '',
     email: '',
     password: '',
     confirmPassword: '',
-    gender: '',
+    gender: 'male',
     acceptTerms: false,
     picture: null,
-    country: '',
+    country: formDataList[formDataList.length - 1]?.country || countries[0],
   });
 
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
@@ -37,39 +48,46 @@ export const Uncontrolled = () => {
   //   }
   // };
 
-  const validateForm = (data: IFormData) =>
-    //: Promise<{ [key: string]: string }>
-    {
-      try {
-        formSchema.validateSync(data, { abortEarly: false });
-        return {};
-      } catch (error) {
-        if (error instanceof ValidationError) {
-          const errors: { [key: string]: string } = {};
-          console.log(error.inner);
-          error.inner.forEach((err) => {
-            if (err.path && !errors[err.path]) {
-              errors[err.path] = err.message;
-            }
-          });
-          return errors;
-        }
-        return {};
+  const validateForm = (data: IFormData) => {
+    try {
+      formSchema.validateSync(data, { abortEarly: false });
+      return {};
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        const errors: { [key: string]: string } = {};
+        error.inner.forEach((err) => {
+          if (err.path && !errors[err.path]) {
+            errors[err.path] = err.message;
+          }
+        });
+        return errors;
       }
-    };
+      return {};
+    }
+  };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const errors = validateForm(formData);
     setFormErrors(errors);
-    // // const validationErrors = validateForm(formData);
-    // if (Object.keys(validationErrors).length === 0) {
-    //   // Dispatch to Redux
-    //   // ...
-    //   navigate('/');
-    // } else {
-    //   // setErrors(validationErrors);
-    // }
 
+    if (Object.keys(errors).length === 0) {
+      const file = formData.picture;
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const base64String = String(reader.result);
+          const finalFormData = {
+            ...formData,
+            pictureBase64: base64String,
+            picture: undefined,
+            id: formDataList.length + 1,
+          };
+          dispatch(addFormData(finalFormData));
+          navigate('/');
+        };
+        reader.readAsDataURL(file);
+      }
+    }
     console.log('Form submitted with data:', formData);
     console.log('Errors:', errors);
   };

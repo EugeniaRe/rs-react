@@ -9,3 +9,17 @@ export interface IFormData {
   picture: File | null;
   country: string;
 }
+
+export interface IFormDataStore {
+  id: number;
+  name: string;
+  age: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  gender: string;
+  acceptTerms: boolean;
+  picture: undefined;
+  pictureBase64: string;
+  country: string;
+}

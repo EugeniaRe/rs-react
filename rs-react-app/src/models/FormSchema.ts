@@ -1,7 +1,6 @@
 import * as yup from 'yup';
 import { MAX_FILE_SIZE } from '../constants/constants';
 
-// Password strength validation
 const passwordStrengthRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/;
 
@@ -36,26 +35,20 @@ export const formSchema = yup.object().shape({
   acceptTerms: yup
     .boolean()
     .oneOf([true], 'You must accept the terms and conditions'),
-  //   picture: yup
-  //     .mixed()
-  //     .test('fileSize', 'File too large (max 5MB)', (value) => {
-  //       return !value || (value && value.size <= MAX_FILE_SIZE); // 5MB
-  //     })
-  //     .test('fileType', 'Unsupported File Format (only png, jpeg)', (value) => {
-  //       return (
-  //         !value ||
-  //         (value && ['image/png', 'image/jpeg', 'image/jpg'].includes(value.type))
-  //       );
-  //     }),
-
   picture: yup
     .mixed()
     .test('fileSize', 'File size must be less than 3MB', (value: File) => {
       return value && value.size <= MAX_FILE_SIZE;
     })
-    .test('fileType', 'Only PNG and JPEG files are allowed', (value: File) => {
-      return value && ['image/png', 'image/jpeg'].includes(value.type);
-    })
+    .test(
+      'fileType',
+      'Only PNG, JPG and JPEG files are allowed',
+      (value: File) => {
+        return (
+          value && ['image/png', 'image/jpg', 'image/jpeg'].includes(value.type)
+        );
+      }
+    )
     .required('Image is required'),
   country: yup.string().required('Country is required'),
 });
