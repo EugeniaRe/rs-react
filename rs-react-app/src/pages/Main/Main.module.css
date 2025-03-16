@@ -1,0 +1,19 @@
+.data_card {
+  border: 2px solid rgb(146, 108, 64);
+  padding: 10px;
+  margin: 10px;
+
+  transition: border-color 0.3s ease-in-out;
+}
+
+.indication {
+  border: 2px solid green;
+}
+
+.picture {
+  max-width: 200px;
+}
+
+.nav_links li {
+  list-style: none;
+}

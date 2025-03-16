@@ -1,0 +1,16 @@
+.form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gender {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn {
+  margin-top: 20px;
+}

@@ -1,0 +1,28 @@
+.country_container {
+  position: relative;
+  width: 100%;
+}
+
+.country_input {
+  display: block;
+  width: calc(100% - 8px);
+}
+
+.country_list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 120px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.country_item {
+  cursor: pointer;
+  list-style: none;
+}
