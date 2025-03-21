@@ -1,8 +1,8 @@
 import './App.css';
-import CountriesList from './components/CountriesList/CountriesList';
+import Main from './components/Main/Main';
 
 function App() {
-  return <CountriesList />;
+  return <Main />;
 }
 
 export default App;

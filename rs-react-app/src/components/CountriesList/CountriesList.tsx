@@ -1,15 +1,41 @@
 import { useEffect, useState } from 'react';
 import { ICountry } from '../../interfaces/interfaces';
-import { getCountries } from '../../servises/api';
 import Country from '../Country/Country';
 import s from './CountriesList.module.css';
 
-const CountriesList = () => {
-  const [countries, setCountries] = useState<ICountry[]>([]);
+interface CountiresListProps {
+  countries: ICountry[];
+}
+
+const CountriesList = ({ countries }: CountiresListProps) => {
+  const storedVisitedCountries = JSON.parse(
+    localStorage.getItem('visitedCountries') || '[]'
+  );
+
+  const [visitedCountries, setVisitedCountries] = useState(
+    new Set(storedVisitedCountries)
+  );
 
   useEffect(() => {
-    getCountries().then(setCountries);
-  }, []);
+    localStorage.setItem(
+      'visitedCountries',
+      JSON.stringify(Array.from(visitedCountries))
+    );
+  }, [visitedCountries]);
+
+  const handleCountryClick = (name: string) => {
+    setVisitedCountries((prev) => {
+      if (prev.has(name)) {
+        return prev;
+      }
+      const newSet = new Set(prev);
+      newSet.add(name);
+
+      return newSet;
+    });
+
+    console.log(visitedCountries);
+  };
 
   return (
     <>
@@ -22,11 +48,13 @@ const CountriesList = () => {
       {countries.map((country) => (
         <Country
           key={country.name.common}
+          handleVisitied={handleCountryClick}
           countryInfo={{
             name: country.name.common,
             population: country.population,
             region: country.region,
             flag: country.flags.svg,
+            isVisited: visitedCountries.has(country.name.common),
           }}
         />
       ))}

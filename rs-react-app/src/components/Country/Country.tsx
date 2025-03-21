@@ -6,14 +6,20 @@ interface CountryProps {
     population: number;
     region: string;
     flag: string;
+    isVisited: boolean;
   };
+  handleVisitied: (name: string) => void;
 }
 
 const Country = ({
-  countryInfo: { name, population, region, flag },
+  countryInfo: { name, population, region, flag, isVisited },
+  handleVisitied,
 }: CountryProps) => {
   return (
-    <div className={s.country_container}>
+    <div
+      onClick={() => handleVisitied(name)}
+      className={`${s.country_container} ${isVisited ? s.visited : ''}`}
+    >
       <div>{name}</div>
       <div> {population}</div>
       <div> {region}</div>
