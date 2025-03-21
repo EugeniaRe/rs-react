@@ -1,5 +1,8 @@
 import './App.css';
+import CountriesList from './components/CountriesList/CountriesList';
 
-function App() {}
+function App() {
+  return <CountriesList />;
+}
 
 export default App;

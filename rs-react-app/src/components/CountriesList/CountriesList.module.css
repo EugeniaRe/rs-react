@@ -1,0 +1,9 @@
+.header {
+  padding: 10px 1%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 1%;
+  align-items: center;
+  border: 1px solid #003838;
+  border-radius: 5px;
+}
