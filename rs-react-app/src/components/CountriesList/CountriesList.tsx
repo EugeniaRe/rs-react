@@ -23,21 +23,20 @@ const CountriesList = ({ countries }: CountiresListProps) => {
     );
   }, [visitedCountries]);
 
-  const handleCountryClick = useCallback((name: string) => {
-    setVisitedCountries((prev) => {
-      if (prev.has(name)) {
-        return prev;
-      }
-      const newSet = new Set(prev);
-      newSet.add(name);
+  const handleCountryClick = useCallback(
+    (name: string) => {
+      setVisitedCountries((prev) => {
+        if (prev.has(name)) {
+          return prev;
+        }
+        const newSet = new Set(prev);
+        newSet.add(name);
 
-      return newSet;
-    });
-  }, []);
-
-  const checkIsVisited = useCallback((name: string) => {
-    return visitedCountries.has(name);
-  }, []);
+        return newSet;
+      });
+    },
+    [visitedCountries]
+  );
 
   return (
     <>
@@ -55,7 +54,7 @@ const CountriesList = ({ countries }: CountiresListProps) => {
           population={country.population}
           region={country.region}
           flag={country.flags.svg}
-          isVisited={checkIsVisited(country.name.common)}
+          isVisited={visitedCountries.has(country.name.common)}
         />
       ))}
     </>

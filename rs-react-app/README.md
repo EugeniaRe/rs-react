@@ -14,8 +14,9 @@ Ranked Chart: ![image](https://github.com/user-attachments/assets/52895afc-5c8a-
 
 ## After optimization
 
-Commit Duration: 3.8ms
-Render Duration: CountriesList - 1.6ms, Filters - 0.6ms, Main - 0.3ms
+Commit Duration: 5.2ms
+
+Render Duration: CountriesList - 3.2ms, Filters - 0.3ms, Main - 0.1ms
 
 Interactions: Sorting by Name A-Z
 

@@ -26,7 +26,7 @@ const Main = () => {
   return (
     <>
       <Filters countries={allcountries} onChange={handleChange} />
-      <CountriesList countries={countries} />;
+      <CountriesList countries={countries} />
     </>
   );
 };
