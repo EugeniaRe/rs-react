@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ICountry } from '../../interfaces/interfaces';
 import Country from '../Country/Country';
 import s from './CountriesList.module.css';
@@ -23,7 +23,7 @@ const CountriesList = ({ countries }: CountiresListProps) => {
     );
   }, [visitedCountries]);
 
-  const handleCountryClick = (name: string) => {
+  const handleCountryClick = useCallback((name: string) => {
     setVisitedCountries((prev) => {
       if (prev.has(name)) {
         return prev;
@@ -33,9 +33,11 @@ const CountriesList = ({ countries }: CountiresListProps) => {
 
       return newSet;
     });
+  }, []);
 
-    console.log(visitedCountries);
-  };
+  const checkIsVisited = useCallback((name: string) => {
+    return visitedCountries.has(name);
+  }, []);
 
   return (
     <>
@@ -49,13 +51,11 @@ const CountriesList = ({ countries }: CountiresListProps) => {
         <Country
           key={country.name.common}
           handleVisitied={handleCountryClick}
-          countryInfo={{
-            name: country.name.common,
-            population: country.population,
-            region: country.region,
-            flag: country.flags.svg,
-            isVisited: visitedCountries.has(country.name.common),
-          }}
+          name={country.name.common}
+          population={country.population}
+          region={country.region}
+          flag={country.flags.svg}
+          isVisited={checkIsVisited(country.name.common)}
         />
       ))}
     </>

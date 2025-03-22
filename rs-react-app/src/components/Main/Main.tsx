@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ICountry } from '../../interfaces/interfaces';
 import { getCountries } from '../../servises/api';
 import CountriesList from '../CountriesList/CountriesList';
@@ -19,9 +19,13 @@ const Main = () => {
     fetchData();
   }, []);
 
+  const handleChange = useCallback((countries: ICountry[]) => {
+    setCountries(countries);
+  }, []);
+
   return (
     <>
-      <Filters countries={allcountries} onChange={setCountries} />
+      <Filters countries={allcountries} onChange={handleChange} />
       <CountriesList countries={countries} />;
     </>
   );
