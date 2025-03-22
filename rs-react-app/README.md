@@ -20,6 +20,8 @@ Render Duration: CountriesList - 3.2ms, Filters - 0.3ms, Main - 0.1ms
 
 Interactions: Sorting by Name A-Z
 
-Flame Graph:
+Flame Graph: ![image](https://github.com/user-attachments/assets/f45e1ad6-d06a-4d1d-be82-209e781ae5aa)
 
-Ranked Chart:
+
+Ranked Chart: ![image](https://github.com/user-attachments/assets/936cb9d3-6629-4d02-a812-47e05901c07e)
+
