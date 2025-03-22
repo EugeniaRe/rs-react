@@ -1,0 +1,16 @@
+.country_container {
+  margin: 10px 0;
+  padding: 0 1%;
+  height: 60px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 1%;
+  align-items: center;
+  background-color: #f0ffff;
+  border: 1px solid #a6fdfd;
+  border-radius: 5px;
+}
+
+.visited {
+  background-color: #dccdfd;
+}
