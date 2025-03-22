@@ -27,30 +27,6 @@ const Filters = ({ countries, onChange }: FiltersProps) => {
   const [selectedRegion, setSelectedRegion] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('');
-  // useEffect(() => {
-  //   const resultCountries = countries
-  //     .filter((country) =>
-  //       selectedRegion ? country.region === selectedRegion : true
-  //     )
-  //     .filter((country) =>
-  //       country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
-  //     )
-  //     .sort((a, b) => {
-  //       switch (sortOption) {
-  //         case SortOptions.NameAsc:
-  //           return a.name.common.localeCompare(b.name.common);
-  //         case SortOptions.NameDesc:
-  //           return b.name.common.localeCompare(a.name.common);
-  //         case SortOptions.PopulationAsc:
-  //           return a.population - b.population;
-  //         case SortOptions.PopulationDesc:
-  //           return b.population - a.population;
-  //         default:
-  //           return 0;
-  //       }
-  //     });
-  //   onChange(resultCountries);
-  // }, [selectedRegion, searchTerm, sortOption]);
 
   const resultCountries = useMemo(
     () =>
